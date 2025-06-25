@@ -430,6 +430,14 @@ input[id="blueArrowBButton"]:checked + label {
         transform-origin: top center;
         transform: scale(var(--scale));
     }
+    .buttonColumn {
+        transform-origin: center right;
+        transform: scale(1.2);
+    }
+    .longGoalCount {
+        transform-origin: center right;
+        transform: scale(1.2);
+    }
     /**/
 
 }
