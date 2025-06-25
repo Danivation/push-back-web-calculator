@@ -17,7 +17,7 @@ window.onload = function() {
     calculateScore();
 }
 
-function scaleToFit() {
+function scaleLongGoals() {
     const wrappers = document.querySelectorAll(".longGoalContainer");
 
     wrappers.forEach(wrapper => {
@@ -31,8 +31,25 @@ function scaleToFit() {
     });
 }
 
-window.addEventListener("resize", scaleToFit);
-window.addEventListener("load", scaleToFit);
+function scaleShortGoals() {
+    const wrappers = document.querySelectorAll(".shortGoalContainer");
+
+    wrappers.forEach(wrapper => {
+        const parent = wrapper.parentElement;
+
+        const scaleX = parent.clientWidth / 600;   // base width
+        const scaleY = parent.clientHeight / 300;  // base height
+        const scale = Math.min(scaleX, scaleY);
+
+        wrapper.style.setProperty("--scale", scale);
+    });
+}
+
+window.addEventListener("resize", scaleLongGoals);
+window.addEventListener("load", scaleLongGoals);
+
+window.addEventListener("resize", scaleShortGoals);
+window.addEventListener("load", scaleShortGoals);
 
 function calculateScore() {
     var redScore = 0

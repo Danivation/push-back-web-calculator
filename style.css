@@ -431,13 +431,31 @@ input[id="blueArrowBButton"]:checked + label {
         transform: scale(var(--scale));
     }
     .buttonColumn {
-        transform-origin: center right;
+        transform-origin: center center;
         transform: scale(1.2);
     }
     .longGoalCount {
-        transform-origin: center right;
+        transform-origin: center center;
         transform: scale(1.2);
     }
     /**/
+
+    .shortGoalContainer {
+        flex-direction: column;
+        margin-top: -100px;
+        transform-origin: top center;
+        transform: scale(var(--scale));
+        justify-content: center;
+    }
+
+    .parkButton {
+        display: none;
+    }
+    .parkButton+div {
+        display: none;
+    }
+    .parkButton+div+div {
+        display: none;
+    }
 
 }
