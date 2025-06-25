@@ -13,29 +13,46 @@ function toggleDarkMode() {
     }
 }
 
-window.onload = function () {
+window.onload = function() {
     calculateScore();
 }
+
+function scaleToFit() {
+    const wrappers = document.querySelectorAll(".longGoalContainer");
+
+    wrappers.forEach(wrapper => {
+        const parent = wrapper.parentElement;
+
+        const scaleX = parent.clientWidth / 600;   // base width
+        const scaleY = parent.clientHeight / 300;  // base height
+        const scale = Math.min(scaleX, scaleY);
+
+        wrapper.style.setProperty("--scale", scale);
+    });
+}
+
+window.addEventListener("resize", scaleToFit);
+window.addEventListener("load", scaleToFit);
 
 function calculateScore() {
     var redScore = 0
     var blueScore = 0
-    var redAutoBonus = document.getElementById("redAutoCheckbox").checked;
-    var blueAutoBonus = document.getElementById("blueAutoCheckbox").checked;
-    var redCountA = Number(document.getElementById("redLongGoalACount").innerHTML);
-    var blueCountA = Number(document.getElementById("blueLongGoalACount").innerHTML);
-    var redCountB = Number(document.getElementById("redLongGoalBCount").innerHTML);
-    var blueCountB = Number(document.getElementById("blueLongGoalBCount").innerHTML);
-    var redControlBonusA = document.getElementById("redArrowAButton").checked;
-    var blueControlBonusA = document.getElementById("blueArrowAButton").checked;
-    var redControlBonusB = document.getElementById("redArrowBButton").checked;
-    var blueControlBonusB = document.getElementById("blueArrowBButton").checked;
-    var redCountHigh = Number(document.getElementById("highGoalRedCount").innerHTML);
-    var blueCountHigh = Number(document.getElementById("highGoalBlueCount").innerHTML);
-    var redCountLow = Number(document.getElementById("lowGoalRedCount").innerHTML);
-    var blueCountLow = Number(document.getElementById("lowGoalBlueCount").innerHTML);
-    var redParkCount = Number(document.getElementById("redParkCount").innerHTML);
-    var blueParkCount = Number(document.getElementById("blueParkCount").innerHTML);
+    const redAutoBonus = document.getElementById("redAutoCheckbox").checked;
+    const blueAutoBonus = document.getElementById("blueAutoCheckbox").checked;
+    const redCountA = Number(document.getElementById("redLongGoalACount").innerHTML);
+    const blueCountA = Number(document.getElementById("blueLongGoalACount").innerHTML);
+    const redCountB = Number(document.getElementById("redLongGoalBCount").innerHTML);
+    const blueCountB = Number(document.getElementById("blueLongGoalBCount").innerHTML);
+    const redControlBonusA = document.getElementById("redArrowAButton").checked;
+    const blueControlBonusA = document.getElementById("blueArrowAButton").checked;
+    const redControlBonusB = document.getElementById("redArrowBButton").checked;
+    const blueControlBonusB = document.getElementById("blueArrowBButton").checked;
+    const redCountHigh = Number(document.getElementById("highGoalRedCount").innerHTML);
+    const blueCountHigh = Number(document.getElementById("highGoalBlueCount").innerHTML);
+    const redCountLow = Number(document.getElementById("lowGoalRedCount").innerHTML);
+    const blueCountLow = Number(document.getElementById("lowGoalBlueCount").innerHTML);
+    const redParkCount = Number(document.getElementById("redParkCount").innerHTML);
+    const blueParkCount = Number(document.getElementById("blueParkCount").innerHTML);
 
     if (redCountA + blueCountA >= 15) {
         document.getElementById("redPlusLongGoalA").disabled = true;

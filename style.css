@@ -63,6 +63,7 @@ body {
     display: flex;
     flex-direction: column;
     color: white;
+    justify-content: center;
 }
 
 .scores {
@@ -123,12 +124,13 @@ body {
 }
 
 .longGoalContainer {
-    padding: 25px 0px;
+    padding: 0px 0px;
     margin: 0px;
     width: 100vw;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .longGoal {
@@ -148,10 +150,14 @@ body {
     flex-wrap: wrap;
 }
 
+.longGoalImage {
+    width: 300px;
+}
+
 .blueButton {
     border-radius: 10%;
-    margin: default;
-    padding: default;
+    margin: 0;
+    padding: 0;
     width: 40px;
     height: 40px;
 }
@@ -187,8 +193,8 @@ body {
 
 .redButton {
     border-radius: 50%;
-    margin: default;
-    padding: default;
+    margin: 0;
+    padding: 0;
     width: 40px;
     height: 40px;
 }
@@ -267,16 +273,16 @@ body {
 
 #longGoalA {
     display: flex;
-    height: 130px;
-    width: auto;
+    height: auto;
+    width: inherit;
     position: absolute;
     z-index: 1;
 }
 
 #longGoalB {
     display: flex;
-    height: 130px;
-    width: auto;
+    height: auto;
+    width: inherit;
     position: absolute;
     z-index: 1;
 }
@@ -297,7 +303,7 @@ body {
 }
 
 .arrowButton {
-    display: inline-block;
+    flex: 1;
     height: 45px;
     width: 45px;
     background-size: cover;
@@ -416,4 +422,14 @@ input[id="blueArrowBButton"]:checked + label {
     font-size: 30px;
     font-weight: bold;
     margin: 0px 20px;
+}
+
+@media (max-width: 600px) {
+    /**/
+    .longGoalContainer {
+        transform-origin: top center;
+        transform: scale(var(--scale));
+    }
+    /**/
+
 }
