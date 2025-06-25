@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js"></script>
+        <title>V5RC Push Back Score Calculator</title>
+    </head>
+    <body id="view">
+        <header class="titleBar">
+            <p>V5RC Push Back Score Calculator</p>
+            <button id="darkModeToggle" onclick="toggleDarkMode()">Light Mode</button>
+        </header>
+
+        <header class="scoresContainer">
+            <div class="scores centeredRow">
+                <div id="redScore">0</div>
+                <div id="scoreIcons">
+                    <label class="autoButton scoreButton">
+                        <input type="checkbox" class="autoCheckbox" id="redAutoCheckbox" onclick="redButtonToggle()">
+                        <img id="redAutoIcon" src="images/auto_icon_red_clear.png">
+                    </label>
+                    <label class="autoButton scoreButton">
+                        <input type="checkbox" class="autoCheckbox" id="blueAutoCheckbox" onclick="blueButtonToggle()">
+                        <img id="blueAutoIcon" src="images/auto_icon_blue_clear.png">
+                    </label>
+                </div>
+                <div id="blueScore">0</div>
+            </div>
+        </header>
+        <div class="content" id="content">
+            <div class="longGoalContainer">
+                <div class="longGoal centeredRow">
+                    <div id="redLongGoalACount" class="longGoalCount">0</div>
+                    <div class="buttonColumn">
+                        <button id="redPlusLongGoalA" class="redButton plusButton scoreButton" onclick="redPlusLongGoalAClick()"></button>
+                        <button id="redMinusLongGoalA" class="redButton minusButton scoreButton" onclick="redMinusLongGoalAClick()" disabled="true"></button>
+                    </div>
+                    <div class="longGoalImage imageColumn">
+                        <img id="longGoalA" src="images/long_goal_empty.png">
+                        <div class="arrowButtonRow">
+                            <input type="radio" name="longGoalAControl" value="red" class="longGoalButton" id="redArrowAButton" onclick="toggleRadioRedA(this)">
+                            <label for="redArrowAButton" class="redArrowA arrowButton"></label>
+                            <input type="radio" name="longGoalAControl" value="blue" class="longGoalButton" id="blueArrowAButton" onclick="toggleRadioBlueA(this)">
+                            <label for="blueArrowAButton" class="blueArrowA arrowButton"></label>
+                        </div>
+                    </div>
+                    <div class="buttonColumn">
+                        <button id="bluePlusLongGoalA" class="blueButton plusButton scoreButton" onclick="bluePlusLongGoalAClick()"></button>
+                        <button id="blueMinusLongGoalA" class="blueButton minusButton scoreButton" onclick="blueMinusLongGoalAClick()" disabled="true"></button>
+                    </div>
+                    <div id="blueLongGoalACount" class="longGoalCount">0</div>
+                </div>
+                <div class="longGoal centeredRow">
+                    <div id="redLongGoalBCount" class="longGoalCount">0</div>
+                    <div class="buttonColumn">
+                        <button id="redPlusLongGoalB" class="redButton plusButton scoreButton" onclick="redPlusLongGoalBClick()"></button>
+                        <button id="redMinusLongGoalB" class="redButton minusButton scoreButton" onclick="redMinusLongGoalBClick()" disabled="true"></button>
+                    </div>
+                    <div class="longGoalImage imageColumn">
+                        <img id="longGoalB" src="images/long_goal_empty.png">
+                        <div class="arrowButtonRow">
+                            <input type="radio" name="longGoalBControl" value="red" class="longGoalButton" id="redArrowBButton" onclick="toggleRadioRedB(this)">
+                            <label for="redArrowBButton" class="redArrowB arrowButton"></label>
+                            <input type="radio" name="longGoalBControl" value="blue" class="longGoalButton" id="blueArrowBButton" onclick="toggleRadioBlueB(this)">
+                            <label for="blueArrowBButton" class="blueArrowB arrowButton"></label>
+                        </div>
+                    </div>
+                    <div class="buttonColumn">
+                        <button id="bluePlusLongGoalB" class="blueButton plusButton scoreButton" onclick="bluePlusLongGoalBClick()"></button>
+                        <button id="blueMinusLongGoalB" class="blueButton minusButton scoreButton" onclick="blueMinusLongGoalBClick()" disabled="true"></button>
+                    </div>
+                    <div id="blueLongGoalBCount" class="longGoalCount">0</div>
+                </div>
+            </div>
+            <div class="shortGoalContainer">
+                <button class="parkButton">red park</button>
+                <div class="buttonColumn">
+                    <button id="redPlusPark" class="redButton plusButton scoreButton" onclick="redPlusParkClick()"></button>
+                    <button id="redMinusPark" class="redButton minusButton scoreButton" onclick="redMinusParkClick()" disabled="true"></button>
+                </div>
+                <div id="redParkCount" class="parkCount">0</div>
+                <div class="shortGoal centeredRow">
+                    <div class="scoreButtonColumn">
+                        <div class="scoreButtonRow">
+                            <div id="highGoalRedCount" class="shortGoalCount">0</div>
+                            <div class="buttonRow">
+                                <button id="redPlusHighGoal" class="redButton plusButton scoreButton" onclick="redPlusHighGoalClick()"></button>
+                                <button id="redMinusHighGoal" class="redButton minusButton scoreButton" onclick="redMinusHighGoalClick()" disabled="true"></button>
+                            </div>
+                        </div>
+                        <div class="scoreButtonRow">
+                            <div id="lowGoalRedCount" class="shortGoalCount">0</div>
+                            <div class="buttonRow">
+                                <button id="redPlusLowGoal" class="redButton plusButton scoreButton" onclick="redPlusLowGoalClick()"></button>
+                                <button id="redMinusLowGoal" class="redButton minusButton scoreButton" onclick="redMinusLowGoalClick()" disabled="true"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shortGoalImage imageColumn">
+                        <img id="shortGoal" src="images/short_goal_empty.png">
+                    </div>
+                    <div class="scoreButtonColumn">
+                        <div class="scoreButtonRow">
+                            <div class="buttonRow">
+                                <button id="bluePlusHighGoal" class="blueButton plusButton scoreButton" onclick="bluePlusHighGoalClick()"></button>
+                                <button id="blueMinusHighGoal" class="blueButton minusButton scoreButton" onclick="blueMinusHighGoalClick()" disabled="true"></button>
+                            </div>
+                            <div id="highGoalBlueCount" class="shortGoalCount">0</div>
+                        </div>
+                        <div class="scoreButtonRow">
+                            <div class="buttonRow">
+                                <button id="bluePlusLowGoal" class="blueButton plusButton scoreButton" onclick="bluePlusLowGoalClick()"></button>
+                                <button id="blueMinusLowGoal" class="blueButton minusButton scoreButton" onclick="blueMinusLowGoalClick()" disabled="true"></button>
+                            </div>
+                            <div id="lowGoalBlueCount" class="shortGoalCount">0</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="blueParkCount" class="parkCount">0</div>
+                <div class="buttonColumn">
+                    <button id="bluePlusPark" class="blueButton plusButton scoreButton" onclick="bluePlusParkClick()"></button>
+                    <button id="blueMinusPark" class="blueButton minusButton scoreButton" onclick="blueMinusParkClick()" disabled="true"></button>
+                </div>
+                <button class="parkButton">blue park</button>
+            </div>
+        </div>
+    </body>
+</html>
