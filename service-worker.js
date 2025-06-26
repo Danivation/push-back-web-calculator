@@ -4,7 +4,9 @@ const OFFLINE_FILES = [
     "/index.html",
     "/style.css",
     "/script.js",
-    "/images/logo.png",
+    "/manifest.json",
+    "/service-worker.js",
+    "/images/",
     // Add all files you want cached
 ];
 
