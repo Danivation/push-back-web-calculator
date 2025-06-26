@@ -22,7 +22,22 @@ function handleFiles() {
     if (!file) {
         messageBox.innerHTML = "No file selected";
     }
-    messageBox.innerHTML = "file";
+
+    const reader = new FileReader();
+    reader.onload = () => {
+        const jsonResult = JSON.parse(reader.result);
+        console.log(jsonResult);
+        if (jsonResult.GAME_FORMAT.startsWith("25_26_PUSH_BACK")) {
+            messageBox.innerHTML = "File loaded";
+            fillScores(jsonResult);
+        } else {
+            messageBox.innerHTML = "Wrong game format";
+        }
+    };
+    reader.onerror = () => {
+        messageBox.innerHTML = "Error reading file";
+    };
+    reader.readAsText(file);
 }
 
 
@@ -49,39 +64,158 @@ function toggleDarkMode() {
     }
 }
 
-function scaleLongGoals() {
-    const wrappers = document.querySelectorAll(".longGoalContainer");
-
-    wrappers.forEach(wrapper => {
-        const parent = wrapper.parentElement;
-
-        const scaleX = parent.clientWidth / 600;   // base width
-        const scaleY = parent.clientHeight / 250;  // base height
-        const scale = Math.min(scaleX, scaleY);
-
-        wrapper.style.setProperty("--scale", scale);
+async function saveFileWithDialog(content = "", filename = "push-back-saved-score.txt") {
+    // Ask user where to save the file
+    const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [
+        {
+            description: "Text Files",
+            accept: {
+            "text/plain": [".txt"],
+            },
+        },
+        ],
     });
+
+    // Create a writable stream and write the content
+    const writable = await handle.createWritable();
+    await writable.write(content);
+    await writable.close();
 }
 
-function scaleShortGoals() {
-    const wrappers = document.querySelectorAll(".shortGoalContainer");
+function saveScores() {
+    let format = {"GAME_FORMAT": "25_26_PUSH_BACK_V1",
+        "DATA": {
+            "RED_SCORE": 0,
+            "BLUE_SCORE": 0,
+            "LONG_GOAL_1_RED": 0,
+            "LONG_GOAL_1_BLUE": 0,
+            "LONG_GOAL_2_RED": 0,
+            "LONG_GOAL_2_BLUE": 0,
+            "HIGH_GOAL_RED": 0,
+            "HIGH_GOAL_BLUE": 0,
+            "LOW_GOAL_RED": 0,
+            "LOW_GOAL_BLUE": 0,
+            "PARK_RED": 0,
+            "PARK_BLUE": 0,
+            "AUTO_BONUS": "NONE",
+            "LONG_GOAL_1_BONUS": "NONE",
+            "LONG_GOAL_2_BONUS": "NONE"
+        }
+    }
+    let data = format.DATA;
 
-    wrappers.forEach(wrapper => {
-        const parent = wrapper.parentElement;
+    calculateScore();
+    data.RED_SCORE = document.getElementById("redScore").innerHTML;
+    data.BLUE_SCORE = document.getElementById("blueScore").innerHTML;
+    data.LONG_GOAL_1_RED = Number(document.getElementById("redLongGoalACount").innerHTML);
+    data.LONG_GOAL_1_BLUE = Number(document.getElementById("blueLongGoalACount").innerHTML);
+    data.LONG_GOAL_2_RED = Number(document.getElementById("redLongGoalBCount").innerHTML);
+    data.LONG_GOAL_2_BLUE = Number(document.getElementById("blueLongGoalBCount").innerHTML);
+    data.HIGH_GOAL_RED = Number(document.getElementById("highGoalRedCount").innerHTML);
+    data.HIGH_GOAL_BLUE = Number(document.getElementById("highGoalBlueCount").innerHTML);
+    data.LOW_GOAL_RED = Number(document.getElementById("lowGoalRedCount").innerHTML);
+    data.LOW_GOAL_BLUE = Number(document.getElementById("lowGoalBlueCount").innerHTML);
+    data.PARK_RED = Number(document.getElementById("redParkCount").innerHTML);
+    data.PARK_BLUE = Number(document.getElementById("blueParkCount").innerHTML);
 
-        const scaleX = parent.clientWidth / 600;   // base width
-        const scaleY = parent.clientHeight / 300;  // base height
-        const scale = Math.min(scaleX, scaleY);
+    const redAutoBonus = document.getElementById("redAutoCheckbox").checked;
+    const blueAutoBonus = document.getElementById("blueAutoCheckbox").checked;
+    const redControlBonusA = document.getElementById("redArrowAButton").checked;
+    const blueControlBonusA = document.getElementById("blueArrowAButton").checked;
+    const redControlBonusB = document.getElementById("redArrowBButton").checked;
+    const blueControlBonusB = document.getElementById("blueArrowBButton").checked;
 
-        wrapper.style.setProperty("--scale", scale);
-    });
+    if (redAutoBonus && blueAutoBonus) data.AUTO_BONUS = "BOTH";
+    else if (redAutoBonus) data.AUTO_BONUS = "RED";
+    else if (blueAutoBonus) data.AUTO_BONUS = "BLUE";
+    else data.AUTO_BONUS = "NONE";
+
+    if (redControlBonusA) data.LONG_GOAL_1_BONUS = "RED";
+    else if (blueControlBonusA) data.LONG_GOAL_1_BONUS = "BLUE";
+    else data.LONG_GOAL_1_BONUS = "NONE";
+
+    if (redControlBonusB) data.LONG_GOAL_2_BONUS = "RED";
+    else if (blueControlBonusB) data.LONG_GOAL_2_BONUS = "BLUE";
+    else data.LONG_GOAL_2_BONUS = "NONE";
+    
+    saveFileWithDialog(JSON.stringify(format, null, 2));
 }
 
-window.addEventListener("resize", scaleLongGoals);
-window.addEventListener("load", scaleLongGoals);
+function fillScores(scores) {
+    const message = messageBox.innerHTML;
+    clearScore();
+    messageBox.innerHTML = message;
+    const data = scores.DATA;
 
-window.addEventListener("resize", scaleShortGoals);
-window.addEventListener("load", scaleShortGoals);
+    if (
+        (data.LONG_GOAL_1_RED + data.LONG_GOAL_1_BLUE <= 15) && 
+        (data.LONG_GOAL_2_RED + data.LONG_GOAL_2_BLUE <= 15) && 
+        (data.HIGH_GOAL_RED + data.HIGH_GOAL_BLUE <= 7) && 
+        (data.LOW_GOAL_RED + data.LOW_GOAL_BLUE <= 7) && 
+        (data.PARK_RED <= 2) && (data.PARK_BLUE <= 2) && 
+        (["NONE", "RED", "BLUE", "BOTH"].includes(data.AUTO_BONUS)) && 
+        (["NONE", "RED", "BLUE"].includes(data.LONG_GOAL_1_BONUS)) && 
+        (["NONE", "RED", "BLUE"].includes(data.LONG_GOAL_2_BONUS))
+    ) {
+        document.getElementById("redLongGoalACount").innerHTML = data.LONG_GOAL_1_RED;
+        document.getElementById("blueLongGoalACount").innerHTML = data.LONG_GOAL_1_BLUE;
+        document.getElementById("redLongGoalBCount").innerHTML = data.LONG_GOAL_2_RED;
+        document.getElementById("blueLongGoalBCount").innerHTML = data.LONG_GOAL_2_BLUE;
+        
+        document.getElementById("highGoalRedCount").innerHTML = data.HIGH_GOAL_RED;
+        document.getElementById("highGoalBlueCount").innerHTML = data.HIGH_GOAL_BLUE;
+        document.getElementById("lowGoalRedCount").innerHTML = data.LOW_GOAL_RED;
+        document.getElementById("lowGoalBlueCount").innerHTML = data.LOW_GOAL_BLUE;
+
+        document.getElementById("redParkCount").innerHTML = data.PARK_RED;
+        document.getElementById("blueParkCount").innerHTML = data.PARK_BLUE;
+
+        switch (data.AUTO_BONUS) {
+            case "NONE":
+                break;
+            case "RED":
+                document.getElementById("redAutoCheckbox").checked = true;
+                break;
+            case "BLUE":
+                document.getElementById("blueAutoCheckbox").checked = true;
+                break;
+            case "BOTH":
+                document.getElementById("redAutoCheckbox").checked = true;
+                document.getElementById("blueAutoCheckbox").checked = true;
+                break;
+        }
+        switch (data.LONG_GOAL_1_BONUS) {
+            case "NONE":
+                break;
+            case "RED":
+                document.getElementById("redArrowAButton").checked = true;
+                break;
+            case "BLUE":
+                document.getElementById("blueArrowAButton").checked = true;
+                break;
+        }
+        switch (data.LONG_GOAL_2_BONUS) {
+            case "NONE":
+                break;
+            case "RED":
+                document.getElementById("redArrowBButton").checked = true;
+                break;
+            case "BLUE":
+                document.getElementById("blueArrowBButton").checked = true;
+                break;
+        }
+        const calculatedScores = calculateScore();
+        if ((calculatedScores.red != data.RED_SCORE) || (calculatedScores.blue != data.BLUE_SCORE)) {
+            clearScore();
+            messageBox.innerHTML = "Invalid score data"
+        }
+    } else {
+        messageBox.innerHTML = "Invalid score data";
+    }
+}
+
 
 function calculateScore() {
     let redScore = 0
@@ -102,6 +236,43 @@ function calculateScore() {
     const blueCountLow = Number(document.getElementById("lowGoalBlueCount").innerHTML);
     const redParkCount = Number(document.getElementById("redParkCount").innerHTML);
     const blueParkCount = Number(document.getElementById("blueParkCount").innerHTML);
+
+    if (redCountA <= 0) {
+        document.getElementById("redArrowAButton").checked = false;
+        document.getElementById("redArrowAButton").disabled = true;
+        document.getElementById("redMinusLongGoalA").disabled = true;
+    } else {
+        document.getElementById("redArrowAButton").disabled = false;
+        document.getElementById("redPlusLongGoalA").disabled = false;
+        document.getElementById("redMinusLongGoalA").disabled = false;
+    }
+    if (blueCountA <= 0) {
+        document.getElementById("blueArrowAButton").checked = false;
+        document.getElementById("blueArrowAButton").disabled = true;
+        document.getElementById("blueMinusLongGoalA").disabled = true;
+    } else {
+        document.getElementById("blueArrowAButton").disabled = false;
+        document.getElementById("bluePlusLongGoalA").disabled = false;
+        document.getElementById("blueMinusLongGoalA").disabled = false;
+    }
+    if (redCountB <= 0) {
+        document.getElementById("redArrowBButton").checked = false;
+        document.getElementById("redArrowBButton").disabled = true;
+        document.getElementById("redMinusLongGoalB").disabled = true;
+    } else {
+        document.getElementById("redArrowBButton").disabled = false;
+        document.getElementById("redPlusLongGoalB").disabled = false;
+        document.getElementById("redMinusLongGoalB").disabled = false;
+    }
+    if (blueCountB <= 0) {
+        document.getElementById("blueArrowBButton").checked = false;
+        document.getElementById("blueArrowBButton").disabled = true;
+        document.getElementById("blueMinusLongGoalB").disabled = true;
+    } else {
+        document.getElementById("blueArrowBButton").disabled = false;
+        document.getElementById("bluePlusLongGoalB").disabled = false;
+        document.getElementById("blueMinusLongGoalB").disabled = false;
+    }
 
     if (redCountA + blueCountA >= 15) {
         document.getElementById("redPlusLongGoalA").disabled = true;
@@ -132,37 +303,34 @@ function calculateScore() {
         document.getElementById("bluePlusLowGoal").disabled = false;
     }
 
-    if (redCountA <= 0) {
-        document.getElementById("redArrowAButton").checked = false;
-        document.getElementById("redArrowAButton").disabled = true;
-    } else {
-        document.getElementById("redArrowAButton").disabled = false;
-    }
-    if (blueCountA <= 0) {
-        document.getElementById("blueArrowAButton").checked = false;
-        document.getElementById("blueArrowAButton").disabled = true;
-    } else {
-        document.getElementById("blueArrowAButton").disabled = false;
-    }
-    if (redCountB <= 0) {
-        document.getElementById("redArrowBButton").checked = false;
-        document.getElementById("redArrowBButton").disabled = true;
-    } else {
-        document.getElementById("redArrowBButton").disabled = false;
-    }
-    if (blueCountB <= 0) {
-        document.getElementById("blueArrowBButton").checked = false;
-        document.getElementById("blueArrowBButton").disabled = true;
-    } else {
-        document.getElementById("blueArrowBButton").disabled = false;
-    }
-
     if (document.getElementById("redArrowAButton").checked == false && document.getElementById("blueArrowAButton").checked == false) {
         document.getElementById("longGoalA").src = "images/long_goal_empty.png"
     }
     if (document.getElementById("redArrowBButton").checked == false && document.getElementById("blueArrowBButton").checked == false) {
         document.getElementById("longGoalB").src = "images/long_goal_empty.png"
     }
+
+    if (redCountHigh <= 0) {
+        document.getElementById("redMinusHighGoal").disabled = true;
+    } else {
+        document.getElementById("redMinusHighGoal").disabled = false;
+    }
+    if (blueCountHigh <= 0) {
+        document.getElementById("blueMinusHighGoal").disabled = true;
+    } else {
+        document.getElementById("blueMinusHighGoal").disabled = false;
+    }
+    if (redCountLow <= 0) {
+        document.getElementById("redMinusLowGoal").disabled = true;
+    } else {
+        document.getElementById("redMinusLowGoal").disabled = false;
+    }
+    if (blueCountLow <= 0) {
+        document.getElementById("blueMinusLowGoal").disabled = true;
+    } else {
+        document.getElementById("blueMinusLowGoal").disabled = false;
+    }
+
 
     if (redCountHigh == blueCountHigh) {
         if (redCountLow > blueCountLow) {
@@ -197,16 +365,30 @@ function calculateScore() {
         document.getElementById("shortGoal").src = "images/short_goal_full_blue.png";
         blueScore += 14;
     }
-
+    
     if (redParkCount == 1) {
         redScore += 8;
+        document.getElementById("redPlusPark").disabled = false;
+        document.getElementById("redMinusPark").disabled = false;
     } else if (redParkCount == 2) {
         redScore += 30;
+        document.getElementById("redPlusPark").disabled = true;
+        document.getElementById("redMinusPark").disabled = false;
+    } else {
+        document.getElementById("redPlusPark").disabled = false;
+        document.getElementById("redMinusPark").disabled = true;
     }
     if (blueParkCount == 1) {
         blueScore += 8;
+        document.getElementById("bluePlusPark").disabled = false;
+        document.getElementById("blueMinusPark").disabled = false;
     } else if (blueParkCount == 2) {
         blueScore += 30;
+        document.getElementById("bluePlusPark").disabled = true;
+        document.getElementById("blueMinusPark").disabled = false;
+    } else {
+        document.getElementById("bluePlusPark").disabled = false;
+        document.getElementById("blueMinusPark").disabled = true;
     }
     
     redScore += (redCountHigh + redCountLow + redCountA + redCountB) * 3;
@@ -225,50 +407,51 @@ function calculateScore() {
         blueScore += 10;
     }
 
-    if (redAutoBonus == true && blueAutoBonus == true) {
+    if (redAutoBonus && blueAutoBonus) {
         redScore += 5;
         blueScore += 5;
-    } else if (redAutoBonus == true) {
+        document.getElementById("redAutoIcon").src = "images/auto_icon_red_active.png";
+        document.getElementById("blueAutoIcon").src = "images/auto_icon_blue_active.png";
+    } else if (redAutoBonus) {
         redScore += 10;
-    } else if (blueAutoBonus == true) {
+        document.getElementById("redAutoIcon").src = "images/auto_icon_red_active.png";
+        document.getElementById("blueAutoIcon").src = "images/auto_icon_blue_clear.png";
+    } else if (blueAutoBonus) {
         blueScore += 10;
+        document.getElementById("blueAutoIcon").src = "images/auto_icon_blue_active.png";
+        document.getElementById("redAutoIcon").src = "images/auto_icon_red_clear.png";
+    } else { 
+        document.getElementById("redAutoIcon").src = "images/auto_icon_red_clear.png";
+        document.getElementById("blueAutoIcon").src = "images/auto_icon_blue_clear.png";
     }
     document.getElementById("redScore").innerHTML = redScore;
     document.getElementById("blueScore").innerHTML = blueScore;
-    return {redScore, blueScore};
+    return {red: redScore, blue: blueScore};
 }
 
 function clearScore() {
     document.getElementById("redAutoCheckbox").checked = false;
     document.getElementById("blueAutoCheckbox").checked = false;
+    
     document.getElementById("redLongGoalACount").innerHTML = "0";
     document.getElementById("blueLongGoalACount").innerHTML = "0";
     document.getElementById("redLongGoalBCount").innerHTML = "0";
     document.getElementById("blueLongGoalBCount").innerHTML = "0";
+    
     document.getElementById("redArrowAButton").checked = false;
     document.getElementById("blueArrowAButton").checked = false;
     document.getElementById("redArrowBButton").checked = false;
     document.getElementById("blueArrowBButton").checked = false;
+    
     document.getElementById("highGoalRedCount").innerHTML = "0";
     document.getElementById("highGoalBlueCount").innerHTML = "0";
     document.getElementById("lowGoalRedCount").innerHTML = "0";
     document.getElementById("lowGoalBlueCount").innerHTML = "0";
+    
     document.getElementById("redParkCount").innerHTML = "0";
     document.getElementById("blueParkCount").innerHTML = "0";
-    document.getElementById("redMinusLongGoalA").disabled = true;
-    document.getElementById("blueMinusLongGoalA").disabled = true;
-    document.getElementById("redMinusLongGoalB").disabled = true;
-    document.getElementById("blueMinusLongGoalB").disabled = true;
-    document.getElementById("redMinusHighGoal").disabled = true;
-    document.getElementById("blueMinusHighGoal").disabled = true;
-    document.getElementById("redMinusLowGoal").disabled = true;
-    document.getElementById("blueMinusLowGoal").disabled = true;
-    document.getElementById("redPlusPark").disabled = false;
-    document.getElementById("bluePlusPark").disabled = false;
-    document.getElementById("redMinusPark").disabled = true;
-    document.getElementById("blueMinusPark").disabled = true;
-    document.getElementById("redAutoIcon").src = "images/auto_icon_red_clear.png";
-    document.getElementById("blueAutoIcon").src = "images/auto_icon_blue_clear.png";
+    
+    messageBox.innerHTML = "";
     lastClickedRadioA = null;
     lastClickedRadioB = null;
     calculateScore();
@@ -640,3 +823,37 @@ function blueMinusParkClick() {
     document.getElementById("blueParkCount").innerHTML = blueParkCount;
     calculateScore();
 }
+
+function scaleLongGoals() {
+    const wrappers = document.querySelectorAll(".longGoalContainer");
+
+    wrappers.forEach(wrapper => {
+        const parent = wrapper.parentElement;
+
+        const scaleX = parent.clientWidth / 600;   // base width
+        const scaleY = parent.clientHeight / 250;  // base height
+        const scale = Math.min(scaleX, scaleY);
+
+        wrapper.style.setProperty("--scale", scale);
+    });
+}
+
+function scaleShortGoals() {
+    const wrappers = document.querySelectorAll(".shortGoalContainer");
+
+    wrappers.forEach(wrapper => {
+        const parent = wrapper.parentElement;
+
+        const scaleX = parent.clientWidth / 600;   // base width
+        const scaleY = parent.clientHeight / 300;  // base height
+        const scale = Math.min(scaleX, scaleY);
+
+        wrapper.style.setProperty("--scale", scale);
+    });
+}
+
+window.addEventListener("resize", scaleLongGoals);
+window.addEventListener("load", scaleLongGoals);
+
+window.addEventListener("resize", scaleShortGoals);
+window.addEventListener("load", scaleShortGoals);
