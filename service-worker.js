@@ -1,12 +1,12 @@
 const CACHE_NAME = "offline-cache-v1";
 const OFFLINE_FILES = [
-    "/",
-    "/index.html",
-    "/style.css",
-    "/script.js",
-    "/manifest.json",
-    "/service-worker.js",
-    "/images/"
+    "/push-back-web-calculator/",
+    "/push-back-web-calculator/index.html",
+    "/push-back-web-calculator/style.css",
+    "/push-back-web-calculator/script.js",
+    "/push-back-web-calculator/manifest.json",
+    "/push-back-web-calculator/service-worker.js",
+    "/push-back-web-calculator/images/"
 ];
 
 self.addEventListener("install", event => {
