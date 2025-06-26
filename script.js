@@ -17,6 +17,10 @@ window.onload = function() {
     calculateScore();
 }
 
+document.addEventListener("dblclick", function (e) {
+  e.preventDefault();
+});
+
 function scaleLongGoals() {
     const wrappers = document.querySelectorAll(".longGoalContainer");
 
