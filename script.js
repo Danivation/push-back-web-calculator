@@ -66,7 +66,7 @@ function toggleDarkMode() {
 
 async function saveFile(filename, content) {
     if (window.showSaveFilePicker) {
-        // Desktop: use File System Access API
+        // Desktop
         const handle = await window.showSaveFilePicker({
             suggestedName: filename,
             types: [{ description: "Text Files", accept: { "text/plain": [".txt"] } }],
@@ -74,8 +74,9 @@ async function saveFile(filename, content) {
         const writable = await handle.createWritable();
         await writable.write(content);
         await writable.close();
+        messageBox.innerHTML = "File saved";
     } else {
-        // Mobile fallback
+        // Mobile
         const blob = new Blob([content], { type: "text/plain" });
         const link = document.createElement("a");
 
@@ -83,11 +84,11 @@ async function saveFile(filename, content) {
         link.href = URL.createObjectURL(blob);
         link.download = filename;
 
-        // Append, click, and clean up
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(link.href);
+        messageBox.innerHTML = "Downloads > Share > Save to Files to save locally";
     }
 }
 
