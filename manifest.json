@@ -8,7 +8,7 @@
     "icons": [
         {
             "src": "/push-back-web-calculator/vex.png",
-            "sizes": "192x192",
+            "sizes": "64x64",
             "type": "image/png"
         }
     ]
