@@ -412,6 +412,7 @@ input[id="blueArrowBButton"]:checked + label {
     display: flex;
     flex-direction: column;
     row-gap: 40px;
+    z-index: 5;
 }
 
 .scoreButtonRow {
@@ -440,6 +441,7 @@ input[id="blueArrowBButton"]:checked + label {
     margin-top: -200px;
     flex-wrap: nowrap;
     align-items: center;
+
 }
 
 .redPark {
