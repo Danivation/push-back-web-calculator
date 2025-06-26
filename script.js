@@ -1,7 +1,7 @@
 if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/push-back-web-calculator/service-worker.js")
-    .then(() => console.log("Service Worker registered"))
-    .catch(err => console.error("Service Worker registration failed:", err));
+    navigator.serviceWorker.register("/push-back-web-calculator/service-worker.js")
+        .then(() => console.log("Service Worker registered"))
+        .catch(err => console.error("Service Worker registration failed:", err));
 }
 
 /*
@@ -24,8 +24,16 @@ function handleFiles() {
     const fileList = this.files;
     print(fileList);
 }
-
 */
+
+
+window.onload = function() {
+    calculateScore();
+}
+
+document.addEventListener("dblclick", function (e) {
+    e.preventDefault();
+});
 
 let darkMode = true;
 function toggleDarkMode() {
@@ -41,14 +49,6 @@ function toggleDarkMode() {
         document.getElementById("content").style = "color: #ffffff";
     }
 }
-
-window.onload = function() {
-    calculateScore();
-}
-
-document.addEventListener("dblclick", function (e) {
-  e.preventDefault();
-});
 
 function scaleLongGoals() {
     const wrappers = document.querySelectorAll(".longGoalContainer");
@@ -237,6 +237,42 @@ function calculateScore() {
     document.getElementById("redScore").innerHTML = redScore;
     document.getElementById("blueScore").innerHTML = blueScore;
     return {redScore, blueScore};
+}
+
+function clearScore() {
+    document.getElementById("redAutoCheckbox").checked = false;
+    document.getElementById("blueAutoCheckbox").checked = false;
+    document.getElementById("redLongGoalACount").innerHTML = "0";
+    document.getElementById("blueLongGoalACount").innerHTML = "0";
+    document.getElementById("redLongGoalBCount").innerHTML = "0";
+    document.getElementById("blueLongGoalBCount").innerHTML = "0";
+    document.getElementById("redArrowAButton").checked = false;
+    document.getElementById("blueArrowAButton").checked = false;
+    document.getElementById("redArrowBButton").checked = false;
+    document.getElementById("blueArrowBButton").checked = false;
+    document.getElementById("highGoalRedCount").innerHTML = "0";
+    document.getElementById("highGoalBlueCount").innerHTML = "0";
+    document.getElementById("lowGoalRedCount").innerHTML = "0";
+    document.getElementById("lowGoalBlueCount").innerHTML = "0";
+    document.getElementById("redParkCount").innerHTML = "0";
+    document.getElementById("blueParkCount").innerHTML = "0";
+    document.getElementById("redMinusLongGoalA").disabled = true;
+    document.getElementById("blueMinusLongGoalA").disabled = true;
+    document.getElementById("redMinusLongGoalB").disabled = true;
+    document.getElementById("blueMinusLongGoalB").disabled = true;
+    document.getElementById("redMinusHighGoal").disabled = true;
+    document.getElementById("blueMinusHighGoal").disabled = true;
+    document.getElementById("redMinusLowGoal").disabled = true;
+    document.getElementById("blueMinusLowGoal").disabled = true;
+    document.getElementById("redPlusPark").disabled = false;
+    document.getElementById("bluePlusPark").disabled = false;
+    document.getElementById("redMinusPark").disabled = true;
+    document.getElementById("blueMinusPark").disabled = true;
+    document.getElementById("redAutoIcon").src = "images/auto_icon_red_clear.png";
+    document.getElementById("blueAutoIcon").src = "images/auto_icon_blue_clear.png";
+    lastClickedRadioA = null;
+    lastClickedRadioB = null;
+    calculateScore();
 }
 
 function redButtonToggle() {

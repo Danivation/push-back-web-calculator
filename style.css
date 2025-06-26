@@ -54,6 +54,12 @@ body {
     left: 100px;
 }
 
+#clearScore {
+    display: inline;
+    position: fixed;
+    left: 170px;
+}
+
 #fileInput {
     display: none;
 }
@@ -494,6 +500,10 @@ input[id="blueArrowBButton"]:checked + label {
         left: 75px;
         top: 45px;
     }
+    #clearScore {
+        left: 130px;
+        top: 45px;
+    }
     .longGoalContainer {
         transform-origin: top center;
         transform: scale(var(--scale));
@@ -519,6 +529,7 @@ input[id="blueArrowBButton"]:checked + label {
     .shortGoal {
         justify-content: center;
         width: 100%;
+        margin: 50px 0px;
     }
     .buttonRow {
         transform-origin: center center;
