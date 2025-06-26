@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link rel="stylesheet" href="style.css">
         <script src="script.js"></script>
         <title>V5RC Push Back Score Calculator</title>
@@ -74,12 +74,6 @@
                 </div>
             </div>
             <div class="shortGoalContainer">
-                <button class="parkButton">red park</button>
-                <div class="buttonColumn">
-                    <button id="redPlusPark" class="redButton plusButton scoreButton" onclick="redPlusParkClick()"></button>
-                    <button id="redMinusPark" class="redButton minusButton scoreButton" onclick="redMinusParkClick()" disabled="true"></button>
-                </div>
-                <div id="redParkCount" class="parkCount">0</div>
                 <div class="shortGoal centeredRow">
                     <div class="scoreButtonColumn">
                         <div class="scoreButtonRow">
@@ -117,12 +111,24 @@
                         </div>
                     </div>
                 </div>
-                <div id="blueParkCount" class="parkCount">0</div>
-                <div class="buttonColumn">
-                    <button id="bluePlusPark" class="blueButton plusButton scoreButton" onclick="bluePlusParkClick()"></button>
-                    <button id="blueMinusPark" class="blueButton minusButton scoreButton" onclick="blueMinusParkClick()" disabled="true"></button>
+                <div class="parkButtons">
+                    <div class="redPark">
+                        <button class="parkButton">red park</button>
+                        <div class="buttonColumn">
+                            <button id="redPlusPark" class="redButton plusButton scoreButton" onclick="redPlusParkClick()"></button>
+                            <button id="redMinusPark" class="redButton minusButton scoreButton" onclick="redMinusParkClick()" disabled="true"></button>
+                        </div>
+                        <div id="redParkCount" class="parkCount">0</div>
+                    </div>
+                    <div class="bluePark">
+                        <div id="blueParkCount" class="parkCount">0</div>
+                        <div class="buttonColumn">
+                            <button id="bluePlusPark" class="blueButton plusButton scoreButton" onclick="bluePlusParkClick()"></button>
+                            <button id="blueMinusPark" class="blueButton minusButton scoreButton" onclick="blueMinusParkClick()" disabled="true"></button>
+                        </div>
+                        <button class="parkButton">blue park</button>
+                    </div>
                 </div>
-                <button class="parkButton">blue park</button>
             </div>
         </div>
     </body>

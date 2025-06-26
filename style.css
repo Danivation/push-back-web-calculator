@@ -373,7 +373,7 @@ input[id="blueArrowBButton"]:checked + label {
     padding: 25px 0px;
     margin: 0px 7vw;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     row-gap: 50px;
     flex-wrap: wrap;
     text-align: center;
@@ -389,6 +389,7 @@ input[id="blueArrowBButton"]:checked + label {
     padding: 0px;
     font-size: 30px;
     font-weight: bold;
+    justify-content: center;
 }
 
 .shortGoalImage {
@@ -424,8 +425,34 @@ input[id="blueArrowBButton"]:checked + label {
     margin: 0px 20px;
 }
 
+.parkButtons {
+    display: flex;
+    flex-direction: row;
+    column-gap: 700px;
+    margin-top: -200px;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.redPark {
+    display: flex;
+    grid-template-columns: auto auto auto;
+    flex-direction: row;
+    align-items: center;
+}
+.bluePark {
+    display: flex;
+    grid-template-columns: auto auto auto;
+    flex-direction: row;
+    align-items: center;
+}
+
+
 @media (max-width: 600px) {
-    /**/
+    #darkModeToggle {
+        right: 20px;
+        top: 45px;
+    }
     .longGoalContainer {
         transform-origin: top center;
         transform: scale(var(--scale));
@@ -438,24 +465,48 @@ input[id="blueArrowBButton"]:checked + label {
         transform-origin: center center;
         transform: scale(1.2);
     }
-    /**/
 
     .shortGoalContainer {
-        flex-direction: column;
-        margin-top: -100px;
+        margin: 0;
+        padding: 0;
+        row-gap: 0;
+        justify-content: center;
+        margin-top: calc(var(--scale)*300px - 300px);
         transform-origin: top center;
         transform: scale(var(--scale));
+    }
+    .shortGoal {
         justify-content: center;
+        width: 100%;
+    }
+    .buttonRow {
+        transform-origin: center center;
+        transform: scale(1.2);
+    }
+    .shortGoalCount {
+        transform-origin: center center;
+        transform: scale(1.2);
     }
 
+    .parkButtons {
+        column-gap: 50px;
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        justify-content: center;
+    }
     .parkButton {
-        display: none;
+        width: 25vw;
+        margin: 0;
     }
-    .parkButton+div {
-        display: none;
+    .parkCount {
+        margin: 0;
     }
-    .parkButton+div+div {
-        display: none;
+    .bluePark>div.buttonColumn {
+        margin: 0px 20px;
+    }
+    .redPark>div.buttonColumn {
+        margin: 0px 20px;
     }
 
 }

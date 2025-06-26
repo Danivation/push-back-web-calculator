@@ -24,7 +24,7 @@ function scaleLongGoals() {
         const parent = wrapper.parentElement;
 
         const scaleX = parent.clientWidth / 600;   // base width
-        const scaleY = parent.clientHeight / 300;  // base height
+        const scaleY = parent.clientHeight / 250;  // base height
         const scale = Math.min(scaleX, scaleY);
 
         wrapper.style.setProperty("--scale", scale);
