@@ -421,10 +421,10 @@ input[id="blueArrowBButton"]:checked + label {
     column-gap: 20px;
 }
 
-.parkButton {
+.parkIcon {
     /*display: none;*/
-    height: 100px;
-    width: 100px;
+    height: 120px;
+    width: 120px;
     margin: 0px 20px;
 }
 
@@ -507,6 +507,7 @@ input[id="blueArrowBButton"]:checked + label {
     }
     .parkIcon {
         width: 30vw;
+        height: auto;
         margin: 0;
     }
     .parkCount {
