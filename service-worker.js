@@ -6,8 +6,7 @@ const OFFLINE_FILES = [
     "/script.js",
     "/manifest.json",
     "/service-worker.js",
-    "/images/",
-    // Add all files you want cached
+    "/images/"
 ];
 
 self.addEventListener("install", event => {
