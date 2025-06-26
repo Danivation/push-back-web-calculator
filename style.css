@@ -10,6 +10,7 @@ body {
     padding-top: 75px;
     width: 100vw;
     background-color: #202020;
+    justify-content: center;
 }
 
 * {
@@ -42,13 +43,13 @@ body {
     right: 30px;
 }
 
-#saveFile {
+#fileSaveButton {
     display: inline;
     position: fixed;
     left: 30px;
 }
 
-#loadFile {
+#fileLoadButton {
     display: inline;
     position: fixed;
     left: 100px;
@@ -62,6 +63,13 @@ body {
 
 #fileInput {
     display: none;
+}
+
+#fileMessage {
+    padding-top: 3px;
+    display: flex;
+    justify-self: center;
+    color: white;
 }
 
 .centeredRow {
@@ -492,11 +500,11 @@ input[id="blueArrowBButton"]:checked + label {
         right: 20px;
         top: 45px;
     }
-    #saveFile {
+    #fileSaveButton {
         left: 20px;
         top: 45px;
     }
-    #loadFile {
+    #fileLoadButton {
         left: 75px;
         top: 45px;
     }

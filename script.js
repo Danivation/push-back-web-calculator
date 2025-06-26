@@ -4,27 +4,26 @@ if ("serviceWorker" in navigator) {
         .catch(err => console.error("Service Worker registration failed:", err));
 }
 
-/*
-const fileSelect = document.getElementById("loadFile");
 const fileElem = document.getElementById("fileInput");
-
-fileSelect.addEventListener(
-    "click",
-    (e) => {
-        if (fileElem) {
+const buttonElem = document.getElementById("fileLoadButton");
+buttonElem.addEventListener("click", autoClick);
+function autoClick() {
+    if (fileElem) {
         fileElem.click();
-        }
-    },
-    false,
-);
-
-const inputElement = document.getElementById("input");
-inputElement.addEventListener("change", handleFiles, false);
-function handleFiles() {
-    const fileList = this.files;
-    print(fileList);
+    }
 }
-*/
+
+const messageBox = document.getElementById("fileMessage");
+fileElem.addEventListener("change", handleFiles);
+function handleFiles() {
+    const file = this.files[0];
+    console.log(file);
+
+    if (!file) {
+        messageBox.innerHTML = "No file selected";
+    }
+    messageBox.innerHTML = "file";
+}
 
 
 window.onload = function() {
@@ -35,7 +34,7 @@ document.addEventListener("dblclick", function (e) {
     e.preventDefault();
 });
 
-let darkMode = true;
+var darkMode = true;
 function toggleDarkMode() {
     if (darkMode == true) {
         darkMode = false;
@@ -85,8 +84,8 @@ window.addEventListener("resize", scaleShortGoals);
 window.addEventListener("load", scaleShortGoals);
 
 function calculateScore() {
-    var redScore = 0
-    var blueScore = 0
+    let redScore = 0
+    let blueScore = 0
     const redAutoBonus = document.getElementById("redAutoCheckbox").checked;
     const blueAutoBonus = document.getElementById("blueAutoCheckbox").checked;
     const redCountA = Number(document.getElementById("redLongGoalACount").innerHTML);
@@ -276,8 +275,8 @@ function clearScore() {
 }
 
 function redButtonToggle() {
-    var redIcon = document.getElementById("redAutoIcon");
-    var redCheckbox = document.getElementById("redAutoCheckbox");
+    let redIcon = document.getElementById("redAutoIcon");
+    let redCheckbox = document.getElementById("redAutoCheckbox");
     if (redCheckbox.checked == true) {
         redIcon.src = "images/auto_icon_red_active.png";
     } else {
@@ -287,8 +286,8 @@ function redButtonToggle() {
 }
 
 function blueButtonToggle() {
-    var blueIcon = document.getElementById("blueAutoIcon");
-    var blueCheckbox = document.getElementById("blueAutoCheckbox");
+    let blueIcon = document.getElementById("blueAutoIcon");
+    let blueCheckbox = document.getElementById("blueAutoCheckbox");
     if (blueCheckbox.checked == true) {
         blueIcon.src = "images/auto_icon_blue_active.png";
     } else {
@@ -300,7 +299,7 @@ function blueButtonToggle() {
 
 
 function redPlusLongGoalAClick() {
-    var redCount = Number(document.getElementById("redLongGoalACount").innerHTML);
+    let redCount = Number(document.getElementById("redLongGoalACount").innerHTML);
     if (redCount < 15) {
         redCount += 1;
         document.getElementById("redMinusLongGoalA").disabled = false;
@@ -314,7 +313,7 @@ function redPlusLongGoalAClick() {
 }
 
 function redMinusLongGoalAClick() {
-    var redCount = Number(document.getElementById("redLongGoalACount").innerHTML);
+    let redCount = Number(document.getElementById("redLongGoalACount").innerHTML);
     if (redCount > 0) {
         redCount -= 1;
         document.getElementById("redPlusLongGoalA").disabled = false;
@@ -328,7 +327,7 @@ function redMinusLongGoalAClick() {
 }
 
 function bluePlusLongGoalAClick() {
-    var blueCount = Number(document.getElementById("blueLongGoalACount").innerHTML);
+    let blueCount = Number(document.getElementById("blueLongGoalACount").innerHTML);
     if (blueCount < 15) {
         blueCount += 1;
         document.getElementById("blueMinusLongGoalA").disabled = false;
@@ -342,7 +341,7 @@ function bluePlusLongGoalAClick() {
 }
 
 function blueMinusLongGoalAClick() {
-    var blueCount = Number(document.getElementById("blueLongGoalACount").innerHTML);
+    let blueCount = Number(document.getElementById("blueLongGoalACount").innerHTML);
     if (blueCount > 0) {
         blueCount -= 1;
         document.getElementById("bluePlusLongGoalA").disabled = false;
@@ -358,7 +357,7 @@ function blueMinusLongGoalAClick() {
 
 
 function redPlusLongGoalBClick() {
-    var redCount = Number(document.getElementById("redLongGoalBCount").innerHTML);
+    let redCount = Number(document.getElementById("redLongGoalBCount").innerHTML);
     if (redCount < 15) {
         redCount += 1;
         document.getElementById("redMinusLongGoalB").disabled = false;
@@ -372,7 +371,7 @@ function redPlusLongGoalBClick() {
 }
 
 function redMinusLongGoalBClick() {
-    var redCount = Number(document.getElementById("redLongGoalBCount").innerHTML);
+    let redCount = Number(document.getElementById("redLongGoalBCount").innerHTML);
     if (redCount > 0) {
         redCount -= 1;
         document.getElementById("redPlusLongGoalB").disabled = false;
@@ -386,7 +385,7 @@ function redMinusLongGoalBClick() {
 }
 
 function bluePlusLongGoalBClick() {
-    var blueCount = Number(document.getElementById("blueLongGoalBCount").innerHTML);
+    let blueCount = Number(document.getElementById("blueLongGoalBCount").innerHTML);
     if (blueCount < 15) {
         blueCount += 1;
         document.getElementById("blueMinusLongGoalB").disabled = false;
@@ -400,7 +399,7 @@ function bluePlusLongGoalBClick() {
 }
 
 function blueMinusLongGoalBClick() {
-    var blueCount = Number(document.getElementById("blueLongGoalBCount").innerHTML);
+    let blueCount = Number(document.getElementById("blueLongGoalBCount").innerHTML);
     if (blueCount > 0) {
         blueCount -= 1;
         document.getElementById("bluePlusLongGoalB").disabled = false;
@@ -449,7 +448,7 @@ function toggleRadioBlueB(radio) {
 }
 
 
-let lastClickedRadioA = null;
+var lastClickedRadioA = null;
 function toggleRadioA(el) {
     if (el === lastClickedRadioA) {
         el.checked = false;
@@ -461,7 +460,7 @@ function toggleRadioA(el) {
 }
 
 
-let lastClickedRadioB = null;
+var lastClickedRadioB = null;
 function toggleRadioB(el) {
     if (el === lastClickedRadioB) {
         el.checked = false;
@@ -474,7 +473,7 @@ function toggleRadioB(el) {
 
 
 function redPlusHighGoalClick() {
-    var redCount = Number(document.getElementById("highGoalRedCount").innerHTML);
+    let redCount = Number(document.getElementById("highGoalRedCount").innerHTML);
     if (redCount < 7) {
         redCount += 1;
         document.getElementById("redMinusHighGoal").disabled = false;
@@ -488,7 +487,7 @@ function redPlusHighGoalClick() {
 }
 
 function redMinusHighGoalClick() {
-    var redCount = Number(document.getElementById("highGoalRedCount").innerHTML);
+    let redCount = Number(document.getElementById("highGoalRedCount").innerHTML);
     if (redCount > 0) {
         redCount -= 1;
         document.getElementById("redPlusHighGoal").disabled = false;
@@ -502,7 +501,7 @@ function redMinusHighGoalClick() {
 }
 
 function redPlusLowGoalClick() {
-    var redCount = Number(document.getElementById("lowGoalRedCount").innerHTML);
+    let redCount = Number(document.getElementById("lowGoalRedCount").innerHTML);
     if (redCount < 7) {
         redCount += 1;
         document.getElementById("redMinusLowGoal").disabled = false;
@@ -516,7 +515,7 @@ function redPlusLowGoalClick() {
 }
 
 function redMinusLowGoalClick() {
-    var redCount = Number(document.getElementById("lowGoalRedCount").innerHTML);
+    let redCount = Number(document.getElementById("lowGoalRedCount").innerHTML);
     if (redCount > 0) {
         redCount -= 1;
         document.getElementById("redPlusLowGoal").disabled = false;
@@ -530,7 +529,7 @@ function redMinusLowGoalClick() {
 }
 
 function bluePlusHighGoalClick() {
-    var blueCount = Number(document.getElementById("highGoalBlueCount").innerHTML);
+    let blueCount = Number(document.getElementById("highGoalBlueCount").innerHTML);
     if (blueCount < 7) {
         blueCount += 1;
         document.getElementById("blueMinusHighGoal").disabled = false;
@@ -544,7 +543,7 @@ function bluePlusHighGoalClick() {
 }
 
 function blueMinusHighGoalClick() {
-    var blueCount = Number(document.getElementById("highGoalBlueCount").innerHTML);
+    let blueCount = Number(document.getElementById("highGoalBlueCount").innerHTML);
     if (blueCount > 0) {
         blueCount -= 1;
         document.getElementById("bluePlusHighGoal").disabled = false;
@@ -558,7 +557,7 @@ function blueMinusHighGoalClick() {
 }
 
 function bluePlusLowGoalClick() {
-    var blueCount = Number(document.getElementById("lowGoalBlueCount").innerHTML);
+    let blueCount = Number(document.getElementById("lowGoalBlueCount").innerHTML);
     if (blueCount < 7) {
         blueCount += 1;
         document.getElementById("blueMinusLowGoal").disabled = false;
@@ -572,7 +571,7 @@ function bluePlusLowGoalClick() {
 }
 
 function blueMinusLowGoalClick() {
-    var blueCount = Number(document.getElementById("lowGoalBlueCount").innerHTML);
+    let blueCount = Number(document.getElementById("lowGoalBlueCount").innerHTML);
     if (blueCount > 0) {
         blueCount -= 1;
         document.getElementById("bluePlusLowGoal").disabled = false;
@@ -587,7 +586,7 @@ function blueMinusLowGoalClick() {
 
 
 function redPlusParkClick() {
-    var redParkCount = Number(document.getElementById("redParkCount").innerHTML);
+    let redParkCount = Number(document.getElementById("redParkCount").innerHTML);
     if (redParkCount < 2) {
         redParkCount += 1;
         document.getElementById("redMinusPark").disabled = false;
@@ -601,7 +600,7 @@ function redPlusParkClick() {
 }
 
 function redMinusParkClick() {
-    var redParkCount = Number(document.getElementById("redParkCount").innerHTML);
+    let redParkCount = Number(document.getElementById("redParkCount").innerHTML);
     if (redParkCount > 0) {
         redParkCount -= 1;
         document.getElementById("redPlusPark").disabled = false;
@@ -615,7 +614,7 @@ function redMinusParkClick() {
 }
 
 function bluePlusParkClick() {
-    var blueParkCount = Number(document.getElementById("blueParkCount").innerHTML);
+    let blueParkCount = Number(document.getElementById("blueParkCount").innerHTML);
     if (blueParkCount < 2) {
         blueParkCount += 1;
         document.getElementById("blueMinusPark").disabled = false;
@@ -629,7 +628,7 @@ function bluePlusParkClick() {
 }
 
 function blueMinusParkClick() {
-    var blueParkCount = Number(document.getElementById("blueParkCount").innerHTML);
+    let blueParkCount = Number(document.getElementById("blueParkCount").innerHTML);
     if (blueParkCount > 0) {
         blueParkCount -= 1;
         document.getElementById("bluePlusPark").disabled = false;

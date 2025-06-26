@@ -5,6 +5,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-title" content="V5RC Calculator">
         <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <meta name="mobile-web-app-capable" content="yes">
 
         <!-- iOS home screen icon -->
         <link rel="apple-touch-icon" href="vex.png">
@@ -13,19 +14,18 @@
         <link rel="stylesheet" href="style.css">
         <link rel="manifest" href="manifest.json">
         <link rel="icon" type="image/x-icon" href="vex.ico">
-        <script src="script.js"></script>
         <title>V5RC Push Back Score Calculator</title>
     </head>
     <body id="view">
         <header class="titleBar">
-            <button id="saveFile" type="button">Save</button>
-            <button id="loadFile" type="button">Load</button>
+            <button id="fileSaveButton" type="button">Save</button>
+            <button id="fileLoadButton" type="button">Load</button>
             <input type="file" id="fileInput">
             <button id="clearScore" type="button" onclick="clearScore()">Clear</button>
             <div>V5RC Push Back Score Calculator</div>
             <button id="darkModeToggle" onclick="toggleDarkMode()">Light Mode</button>
         </header>
-
+        <div id="fileMessage"></div>
         <header class="scoresContainer">
             <div class="scores centeredRow">
                 <div id="redScore">0</div>
@@ -145,5 +145,6 @@
                 </div>
             </div>
         </div>
+        <script src="script.js"></script>
     </body>
 </html>
