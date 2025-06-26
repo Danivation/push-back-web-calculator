@@ -10,7 +10,13 @@ body {
     padding-top: 75px;
     width: 100vw;
     background-color: #202020;
+}
+
+* {
     touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 
 .titleBar {
