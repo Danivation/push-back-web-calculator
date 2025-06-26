@@ -1,4 +1,4 @@
-const CACHE_NAME = "offline-cache-v1";
+const CACHE_NAME = "offline-cache-v2";
 const OFFLINE_FILES = [
     "/push-back-web-calculator/",
     "/push-back-web-calculator/index.html",
