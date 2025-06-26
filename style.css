@@ -42,6 +42,22 @@ body {
     right: 30px;
 }
 
+#saveFile {
+    display: inline;
+    position: fixed;
+    left: 30px;
+}
+
+#loadFile {
+    display: inline;
+    position: fixed;
+    left: 100px;
+}
+
+#fileInput {
+    display: none;
+}
+
 .centeredRow {
     margin: auto;
     display: grid;
@@ -424,7 +440,7 @@ input[id="blueArrowBButton"]:checked + label {
 .parkIcon {
     /*display: none;*/
     height: 120px;
-    width: 120px;
+    width: 110px;
     margin: 0px 20px;
 }
 
@@ -438,7 +454,7 @@ input[id="blueArrowBButton"]:checked + label {
     display: flex;
     flex-direction: row;
     column-gap: 700px;
-    margin-top: -200px;
+    margin-top: -210px;
     flex-wrap: nowrap;
     align-items: center;
 
@@ -459,8 +475,23 @@ input[id="blueArrowBButton"]:checked + label {
 
 
 @media (max-width: 600px) {
+    .titleBar {
+        font-size: 22px;
+        align-items: start;
+    }
+    .titleBar>div {
+        margin-top: 8px;
+    }
     #darkModeToggle {
         right: 20px;
+        top: 45px;
+    }
+    #saveFile {
+        left: 20px;
+        top: 45px;
+    }
+    #loadFile {
+        left: 75px;
         top: 45px;
     }
     .longGoalContainer {

@@ -4,6 +4,28 @@ if ("serviceWorker" in navigator) {
     .catch(err => console.error("Service Worker registration failed:", err));
 }
 
+/*
+const fileSelect = document.getElementById("loadFile");
+const fileElem = document.getElementById("fileInput");
+
+fileSelect.addEventListener(
+    "click",
+    (e) => {
+        if (fileElem) {
+        fileElem.click();
+        }
+    },
+    false,
+);
+
+const inputElement = document.getElementById("input");
+inputElement.addEventListener("change", handleFiles, false);
+function handleFiles() {
+    const fileList = this.files;
+    print(fileList);
+}
+
+*/
 
 let darkMode = true;
 function toggleDarkMode() {

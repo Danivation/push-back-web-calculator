@@ -1,4 +1,4 @@
-const CACHE_NAME = "offline-cache-v2";
+const CACHE_NAME = "offline-cache-v3";
 const OFFLINE_FILES = [
     "/push-back-web-calculator/",
     "/push-back-web-calculator/index.html",
@@ -49,7 +49,9 @@ const OFFLINE_FILES = [
     "/push-back-web-calculator/images/short_goal_top_blue.png",
     "/push-back-web-calculator/images/short_goal_top_blue_bottom_red.png",
     "/push-back-web-calculator/images/short_goal_top_red.png",
-    "/push-back-web-calculator/images/short_goal_top_red_bottom_blue.png"
+    "/push-back-web-calculator/images/short_goal_top_red_bottom_blue.png",
+    "/push-back-web-calculator/images/park_red.png",
+    "/push-back-web-calculator/images/park_blue.png"
 ];
 
 self.addEventListener("install", event => {
@@ -74,6 +76,7 @@ self.addEventListener("fetch", event => {
       .then(response => {
         return caches.open(CACHE_NAME).then(cache => {
           cache.put(event.request, response.clone()); // update cache
+          console.log(response);
           return response;
         });
       })

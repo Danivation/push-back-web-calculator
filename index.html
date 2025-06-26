@@ -4,12 +4,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <link rel="stylesheet" href="style.css">
         <link rel="manifest" href="manifest.json">
+        <link rel="icon" type="image/x-icon" href="vex.ico">
         <script src="script.js"></script>
         <title>V5RC Push Back Score Calculator</title>
     </head>
     <body id="view">
         <header class="titleBar">
-            <p>V5RC Push Back Score Calculator</p>
+            <button id="saveFile" type="button">Save</button>
+            <button id="loadFile" type="button">Load</button>
+            <input type="file" id="fileInput">
+            <div>V5RC Push Back Score Calculator</div>
             <button id="darkModeToggle" onclick="toggleDarkMode()">Light Mode</button>
         </header>
 
@@ -114,7 +118,7 @@
                 </div>
                 <div class="parkButtons">
                     <div class="redPark">
-                        <img class="parkIcon" src="images/IMG_1044.png">
+                        <img class="parkIcon" src="images/park_red.png">
                         <div class="buttonColumn">
                             <button id="redPlusPark" class="redButton plusButton scoreButton" onclick="redPlusParkClick()"></button>
                             <button id="redMinusPark" class="redButton minusButton scoreButton" onclick="redMinusParkClick()" disabled="true"></button>
@@ -127,7 +131,7 @@
                             <button id="bluePlusPark" class="blueButton plusButton scoreButton" onclick="bluePlusParkClick()"></button>
                             <button id="blueMinusPark" class="blueButton minusButton scoreButton" onclick="blueMinusParkClick()" disabled="true"></button>
                         </div>
-                        <img class="parkIcon" src="images/IMG_1043.png">
+                        <img class="parkIcon" src="images/park_blue.png">
                     </div>
                 </div>
             </div>
