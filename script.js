@@ -64,24 +64,31 @@ function toggleDarkMode() {
     }
 }
 
-async function saveFileWithDialog(content = "", filename = "push-back-saved-score.txt") {
-    // Ask user where to save the file
-    const handle = await window.showSaveFilePicker({
-        suggestedName: filename,
-        types: [
-        {
-            description: "Text Files",
-            accept: {
-            "text/plain": [".txt"],
-            },
-        },
-        ],
-    });
+async function saveFile(filename, content) {
+    if (window.showSaveFilePicker) {
+        // Desktop: use File System Access API
+        const handle = await window.showSaveFilePicker({
+            suggestedName: filename,
+            types: [{ description: "Text Files", accept: { "text/plain": [".txt"] } }],
+        });
+        const writable = await handle.createWritable();
+        await writable.write(content);
+        await writable.close();
+    } else {
+        // Mobile fallback
+        const blob = new Blob([content], { type: "text/plain" });
+        const link = document.createElement("a");
 
-    // Create a writable stream and write the content
-    const writable = await handle.createWritable();
-    await writable.write(content);
-    await writable.close();
+        link.style = "display: none";
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+
+        // Append, click, and clean up
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(link.href);
+    }
 }
 
 function saveScores() {
@@ -140,7 +147,7 @@ function saveScores() {
     else if (blueControlBonusB) data.LONG_GOAL_2_BONUS = "BLUE";
     else data.LONG_GOAL_2_BONUS = "NONE";
     
-    saveFileWithDialog(JSON.stringify(format, null, 2));
+    saveFile("push-back-saved-score.txt", JSON.stringify(format, null, 2));
 }
 
 function fillScores(scores) {
