@@ -67,6 +67,7 @@ function toggleDarkMode() {
 async function saveFile(filename, content) {
     if (window.showSaveFilePicker) {
         // Desktop
+        /**
         const handle = await window.showSaveFilePicker({
             suggestedName: filename,
             types: [{ description: "Text Files", accept: { "text/plain": [".txt"] } }],
@@ -74,6 +75,19 @@ async function saveFile(filename, content) {
         const writable = await handle.createWritable();
         await writable.write(content);
         await writable.close();
+        /**/
+        const blob = new Blob([content], { type: "text/plain" });
+        const link = document.createElement("a");
+
+        link.style = "display: none";
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(link.href);
+        /**/
         messageBox.innerHTML = "File saved";
     } else {
         // Mobile
@@ -311,11 +325,19 @@ function calculateScore() {
         document.getElementById("bluePlusLowGoal").disabled = false;
     }
 
-    if (document.getElementById("redArrowAButton").checked == false && document.getElementById("blueArrowAButton").checked == false) {
+    if (!redControlBonusA && !blueControlBonusA) {
         document.getElementById("longGoalA").src = "images/long_goal_empty.png"
+    } else if (redControlBonusA) {
+        document.getElementById("longGoalA").src = "images/long_goal_red.png"
+    } else if (blueControlBonusA) {
+        document.getElementById("longGoalA").src = "images/long_goal_blue.png"
     }
-    if (document.getElementById("redArrowBButton").checked == false && document.getElementById("blueArrowBButton").checked == false) {
+    if (!redControlBonusB && !blueControlBonusB) {
         document.getElementById("longGoalB").src = "images/long_goal_empty.png"
+    } else if (redControlBonusB) {
+        document.getElementById("longGoalB").src = "images/long_goal_red.png"
+    } else if (blueControlBonusB) {
+        document.getElementById("longGoalB").src = "images/long_goal_blue.png"
     }
 
     if (redCountHigh <= 0) {
@@ -460,6 +482,7 @@ function clearScore() {
     document.getElementById("blueParkCount").innerHTML = "0";
     
     messageBox.innerHTML = "";
+    fileElem.value = "";
     lastClickedRadioA = null;
     lastClickedRadioB = null;
     calculateScore();
