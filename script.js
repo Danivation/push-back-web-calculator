@@ -1,8 +1,10 @@
+/**
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("/push-back-web-calculator/service-worker.js")
         .then(() => console.log("Service Worker registered"))
         .catch(err => console.error("Service Worker registration failed:", err));
 }
+/**/
 
 const fileElem = document.getElementById("fileInput");
 const buttonElem = document.getElementById("fileLoadButton");
