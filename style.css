@@ -37,6 +37,12 @@ body {
     font-weight: bold;
 }
 
+#scoringModeSelector {
+    display: inline;
+    position: fixed;
+    right: 140px;
+}
+
 #darkModeToggle {
     display: inline;
     position: fixed;

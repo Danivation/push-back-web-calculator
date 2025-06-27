@@ -19,6 +19,10 @@
             <input type="file" id="fileInput" accept=".txt">
             <button id="clearScore" type="button" onclick="clearScore()">Clear</button>
             <div>V5RC Push Back Score Calculator</div>
+            <select name="scoringMode" id="scoringModeSelector">
+                <option value="v5match">V5RC Match</option>
+                <option value="v5skills">V5RC Skills</option>
+            </select>
             <button id="darkModeToggle" onclick="toggleDarkMode()">Light Mode</button>
         </header>
         <div id="fileMessage"></div>
