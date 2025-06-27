@@ -1,4 +1,4 @@
-/**
+/**/
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("/push-back-web-calculator/service-worker.js")
         .then(() => console.log("Service Worker registered"))
