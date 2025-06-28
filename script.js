@@ -250,10 +250,6 @@ function calculateScore() {
     const blueCountA = Number(document.getElementById("blueLongGoalACount").innerHTML);
     const redCountB = Number(document.getElementById("redLongGoalBCount").innerHTML);
     const blueCountB = Number(document.getElementById("blueLongGoalBCount").innerHTML);
-    const redControlBonusA = document.getElementById("redArrowAButton").checked;
-    const blueControlBonusA = document.getElementById("blueArrowAButton").checked;
-    const redControlBonusB = document.getElementById("redArrowBButton").checked;
-    const blueControlBonusB = document.getElementById("blueArrowBButton").checked;
     const redCountHigh = Number(document.getElementById("highGoalRedCount").innerHTML);
     const blueCountHigh = Number(document.getElementById("highGoalBlueCount").innerHTML);
     const redCountLow = Number(document.getElementById("lowGoalRedCount").innerHTML);
@@ -297,6 +293,10 @@ function calculateScore() {
         document.getElementById("bluePlusLongGoalB").disabled = false;
         document.getElementById("blueMinusLongGoalB").disabled = false;
     }
+    const redControlBonusA = document.getElementById("redArrowAButton").checked;
+    const blueControlBonusA = document.getElementById("blueArrowAButton").checked;
+    const redControlBonusB = document.getElementById("redArrowBButton").checked;
+    const blueControlBonusB = document.getElementById("blueArrowBButton").checked;
 
     if (redCountA + blueCountA >= 15) {
         document.getElementById("redPlusLongGoalA").disabled = true;
