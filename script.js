@@ -907,12 +907,14 @@ function switchMode() {
         document.querySelector(".skills_scores").style = "display: none";
         scaleLongGoals();
         scaleShortGoals();
+        clearScore();
     } else if (scoringMode.value == "v5skills") {
         console.log("skills");
         document.querySelector(".content").style = "display: none";
         document.querySelector(".skills_content").style = "display: flex";
         document.querySelector(".scores").style = "display: none";
         document.querySelector(".skills_scores").style = "display: flex";
+        clearScore();
     }
 }
 
