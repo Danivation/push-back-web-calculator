@@ -132,7 +132,7 @@
                 </div>
                 <div class="parkButtons">
                     <div class="redPark">
-                        <img class="parkIcon" src="images/park_red.png">
+                        <img class="parkIcon" id="parkIconRed" src="images/park_red_unparked.png">
                         <div class="buttonColumn">
                             <button id="redPlusPark" class="redButton plusButton scoreButton" onclick="redPlusParkClick()"></button>
                             <button id="redMinusPark" class="redButton minusButton scoreButton" onclick="redMinusParkClick()" disabled="true"></button>
@@ -145,7 +145,7 @@
                             <button id="bluePlusPark" class="blueButton plusButton scoreButton" onclick="bluePlusParkClick()"></button>
                             <button id="blueMinusPark" class="blueButton minusButton scoreButton" onclick="blueMinusParkClick()" disabled="true"></button>
                         </div>
-                        <img class="parkIcon" src="images/park_blue.png">
+                        <img class="parkIcon" id="parkIconBlue" src="images/park_blue_unparked.png">
                     </div>
                 </div>
             </div>
@@ -176,7 +176,7 @@
                     </label>
                 </div>
             </div>
-            <div>
+            <div class="skillsBottomRow">
                 <div class="skillsScoredContainer">
                     <div class="skillsScoredBlocks">
                         <div id="skillsBlockCount">0</div>
@@ -198,7 +198,7 @@
                 <div class="skillsParkedZone">
                     <label class="skillsParkButton">
                         <input type="checkbox" id="skillsParkedButton" style="display: none" onclick="calculateSkillsScore()">
-                        <img id="skillsParked" src="images/park_clear.png">
+                        <img id="skillsParked" src="images/park_red_unparked.png">
                     </label>
                 </div>
                 <div class="skillsParkContainer">

@@ -628,10 +628,24 @@ input[id="blueArrowBButton"]:checked + label {
     aspect-ratio: 250/202.613;
     width: 250px;
 }
-.skillsScoredContainer {
+
+.skillsBottomRow {
     padding: 0px 0px;
     margin: 0px;
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    overflow: hidden;
+
+}
+
+.skillsScoredContainer {
+    padding: 0px 0px;
+    margin: 0px;
+    width: auto;
+    min-width: 400px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -687,7 +701,8 @@ input[id="blueArrowBButton"]:checked + label {
 .skillsParkContainer {
     padding: 0px 0px;
     margin: 0px;
-    width: 100%;
+    width: auto;
+    min-width: 400px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -734,7 +749,7 @@ input[id="blueArrowBButton"]:checked + label {
     width: 200px;
     padding: 0px 0px;
     margin: 0px;
-    width: 100%;
+    width: auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;

@@ -920,12 +920,18 @@ const skillsBlocksPlusButton = document.getElementById("skillsPlusBlocks");
 const skillsBlocksMinusButton = document.getElementById("skillsMinusBlocks");
 const skillsLoadersPlusButton = document.getElementById("skillsPlusLoaders");
 const skillsLoadersMinusButton = document.getElementById("skillsMinusLoaders");
+const skillsParkedButton = document.getElementById("skillsParkedButton");
+const skillsRedParkButton = document.getElementById("skillsRedParkButton");
+const skillsBlueParkButton = document.getElementById("skillsBlueParkButton");
 
 const skillsLongGoalAImage = document.getElementById("longGoalSkillsA");
 const skillsLongGoalBImage = document.getElementById("longGoalSkillsB");
 const skillsShortGoalImage = document.getElementById("shortGoalSkills"); 
 const skillsBlockNumber = document.getElementById("skillsBlockCount"); 
 const skillsLoaderNumber = document.getElementById("skillsLoaderCount"); 
+const skillsParkedImage = document.getElementById("skillsParked"); 
+const skillsRedParkImage = document.getElementById("skillsRedPark"); 
+const skillsBlueParkImage = document.getElementById("skillsBluePark"); 
 function calculateSkillsScore(el) {
     let skillsScore = 0;
     let skillsBlockCount = Number(skillsBlockNumber.innerHTML);
@@ -1001,6 +1007,25 @@ function calculateSkillsScore(el) {
     }
     skillsBlockNumber.innerHTML = skillsBlockCount;
     skillsLoaderNumber.innerHTML = skillsLoaderCount;
+    
+    if (skillsParkedButton.checked) {
+        skillsParkedImage.src = "images/park_red_parked.png";
+        skillsScore += 15;
+    } else {
+        skillsParkedImage.src = "images/park_red_unparked.png";
+    }
+    if (skillsRedParkButton.checked) {
+        skillsRedParkImage.src = "images/park_red.png";
+        skillsScore += 5;
+    } else {
+        skillsRedParkImage.src = "images/park_clear.png";
+    }
+    if (skillsBlueParkButton.checked) {
+        skillsBlueParkImage.src = "images/park_blue.png";
+        skillsScore += 5;
+    } else {
+        skillsBlueParkImage.src = "images/park_clear.png";
+    }
 
     skillsScore += (skillsLoaderCount * 5) + (skillsBlockCount);
     document.getElementById("skillsScore").innerHTML = skillsScore;
