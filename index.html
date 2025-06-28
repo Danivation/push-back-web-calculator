@@ -43,6 +43,9 @@
                 </div>
                 <div id="blueScore">0</div>
             </div>
+            <div class="skills_scores centeredRow">
+                <div id="skillsScore">0</div>
+            </div>
         </header>
         <div class="content" id="content">
             <div class="longGoalContainer">
@@ -144,6 +147,33 @@
                         </div>
                         <img class="parkIcon" src="images/park_blue.png">
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="skills_content" id="skills_content">
+            <div class="skillsGoalsContainer">
+                <div class="longGoalImageSkills">
+                    <label class="skillsLongGoalButton">
+                        <input type="checkbox" id="skillsLongGoalAButton" style="display: none" onclick="skillsLongGoalAToggle()">
+                        <img id="longGoalSkillsA" src="images/long_goal_empty.png">
+                    </label>
+                </div>
+                <div class="shortGoalImageSkills">
+                    <label class="skillsShortGoalButton" id="skillsHighGoal">
+                        <input type="checkbox" id="skillsHighGoalButton" style="display: none" onclick="skillsShortGoalToggle()">
+                    </label>
+                    <div class="skillsShortGoalSpacer">
+                        <img id="shortGoalSkills" src="images/short_goal_empty.png">
+                    </div>
+                    <label class="skillsShortGoalButton" id="skillsLowGoal">
+                        <input type="checkbox" id="skillsLowGoalButton" style="display: none" onclick="skillsShortGoalToggle()">
+                    </label>
+                </div>
+                <div class="longGoalImageSkills">
+                    <label class="skillsLongGoalButton">
+                        <input type="checkbox" id="skillsLongGoalBButton" style="display: none" onclick="skillsLongGoalBToggle()">
+                        <img id="longGoalSkillsB" src="images/long_goal_empty.png">
+                    </label>
                 </div>
             </div>
         </div>

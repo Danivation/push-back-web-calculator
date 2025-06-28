@@ -120,6 +120,18 @@ body {
     justify-content: center;
 }
 
+.skills_content {
+    height: max-content;
+    margin: auto;
+    position: fixed;
+    top: 175px;
+    width: 100vw;
+    display: none;
+    flex-direction: column;
+    color: white;
+    justify-content: center;
+}
+
 .scores {
     display: flex;
     flex-direction: row;
@@ -127,6 +139,15 @@ body {
     width: 20%;
     grid-template-columns: 1fr auto 1fr;
     column-gap: 100px;
+    padding: 20px;
+    font-size: 40px;
+}
+
+.skills_scores {
+    display: none;
+    flex-direction: row;
+    position: fixed;
+    width: 20%;
     padding: 20px;
     font-size: 40px;
 }
@@ -151,6 +172,15 @@ body {
     align-items: center;
     position: relative;
     right: 90px;
+}
+
+#skillsScore {
+    color: white;
+    font-weight: bold;
+    min-width: 75px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 #scoreIcons {
@@ -202,10 +232,6 @@ body {
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-}
-
-.longGoalImage {
-    width: 300px;
 }
 
 .blueButton {
@@ -311,12 +337,6 @@ body {
     text-align: center;
     justify-content: center;
     align-items: center;
-}
-
-.longGoalImage {
-    display: flex;
-    gap: 15px;
-    min-width: 300px;
 }
 
 .imageColumn {
@@ -502,6 +522,120 @@ input[id="blueArrowBButton"]:checked + label {
     flex-direction: row;
     align-items: center;
 }
+.longGoalImage {
+    display: flex;
+    gap: 15px;
+    width: 300px;
+    height: auto;
+}
+
+.longGoalImage img {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    width: 300px;
+}
+
+
+
+
+
+
+
+
+.skillsGoalsContainer {
+    padding: 0px 0px;
+    margin: 0px;
+    width: 100vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    overflow: hidden;
+}
+.skillsGoalsContainer div {
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.skillsLongGoalButton {
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    display: flex;
+    border: none;
+    background: none;
+    cursor: pointer;
+    height: 160px;
+    overflow: hidden;
+}
+
+.skillsShortGoalSpacer {
+    display: flex;
+    height: 40px;
+    width: 250px;
+    margin: 0;
+    align-items: start;
+    justify-content: center;
+    display: flex;
+    border: none;
+    background: none;
+
+}
+.skillsShortGoalButton {
+    display: flex;
+    height: 50px;
+    width: 230px;
+    margin: 0;
+    align-items: start;
+    justify-content: center;
+    display: flex;
+    border: none;
+    background: none;
+    cursor: pointer;
+    z-index: 10;
+}
+
+
+.longGoalImageSkills {
+    display: flex;
+    gap: 15px;
+    width: 400px;
+    height: auto;
+}
+
+.longGoalImageSkills img {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 300/131.5;
+    height: auto;
+    width: 400px;
+}
+
+.shortGoalImageSkills {
+    display: flex;
+    width: 250px;
+    height: auto;
+}
+
+.shortGoalImageSkills img {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 250/202.613;
+    width: 250px;
+
+}
+
+
+
 
 @media (max-width: 1000px) {
     .titleBar {

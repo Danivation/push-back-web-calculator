@@ -2,7 +2,7 @@
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("/push-back-web-calculator/service-worker.js")
         .then(() => console.log("Service Worker registered"))
-        .catch(err => console.error("Service Worker registration failed:", err));
+        .catch(err => console.warn("Service Worker registration failed:", err));
 }
 /**/
 
@@ -890,3 +890,61 @@ window.addEventListener("load", scaleLongGoals);
 
 window.addEventListener("resize", scaleShortGoals);
 window.addEventListener("load", scaleShortGoals);
+
+const scoringMode = document.getElementById("scoringModeSelector");
+scoringMode.addEventListener("change", switchMode);
+function switchMode() {
+    if (scoringMode.value == "v5match") {
+        console.log("match");
+        document.querySelector(".content").style = "display: flex";
+        document.querySelector(".skills_content").style = "display: none";
+        document.querySelector(".scores").style = "display: flex";
+        document.querySelector(".skills_scores").style = "display: none";
+    } else if (scoringMode.value == "v5skills") {
+        console.log("skills");
+        document.querySelector(".content").style = "display: none";
+        document.querySelector(".skills_content").style = "display: flex";
+        document.querySelector(".scores").style = "display: none";
+        document.querySelector(".skills_scores").style = "display: flex";
+    }
+}
+
+
+
+
+function calculateSkillsScore() {
+
+}
+
+const skillsHighGoal = document.getElementById("skillsHighGoalButton");
+const skillsLowGoal = document.getElementById("skillsLowGoalButton");
+function skillsShortGoalToggle() {
+    if (skillsHighGoal.checked && skillsLowGoal.checked) {
+        document.getElementById("shortGoalSkills").src = "images/short_goal_full_red.png";
+    } else if (skillsHighGoal.checked) {
+        document.getElementById("shortGoalSkills").src = "images/short_goal_top_red.png";
+    } else if (skillsLowGoal.checked) {
+        document.getElementById("shortGoalSkills").src = "images/short_goal_bottom_red.png";
+    } else {
+        document.getElementById("shortGoalSkills").src = "images/short_goal_empty.png";
+    }
+}
+
+const skillsLongGoalA = document.getElementById("skillsLongGoalAButton");
+function skillsLongGoalAToggle() {
+    if (skillsLongGoalA.checked) {
+        document.getElementById("longGoalSkillsA").src = "images/long_goal_red.png";
+    } else {
+        document.getElementById("longGoalSkillsA").src = "images/long_goal_empty.png";
+    }
+    calculateSkillsScore();
+}
+
+const skillsLongGoalB = document.getElementById("skillsLongGoalBButton");
+function skillsLongGoalBToggle() {
+    if (skillsLongGoalB.checked) {
+        document.getElementById("longGoalSkillsB").src = "images/long_goal_red.png";
+    } else {
+        document.getElementById("longGoalSkillsB").src = "images/long_goal_empty.png";
+    }
+}
