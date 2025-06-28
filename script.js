@@ -785,6 +785,7 @@ function bluePlusLowGoalClick() {
     document.getElementById("lowGoalBlueCount").innerHTML = blueCount;
     calculateScore();
 }
+
 function blueMinusLowGoalClick() {
     let blueCount = Number(document.getElementById("lowGoalBlueCount").innerHTML);
     if (blueCount > 0) {
@@ -798,66 +799,7 @@ function blueMinusLowGoalClick() {
     document.getElementById("lowGoalBlueCount").innerHTML = blueCount;
     calculateScore();
 }
-function calculate() {
-    let blueLowGoalCount = Number(document.getElementById("lowGoalBlueCount").innerHTML);
-    if (blueLowGoalCount < 7) {
-        blueLowGoalCount += 1;
-        document.getElementById("blueMinusLowGoal").disabled = false;
-    }
-    if (blueLowGoalCount >= 7) {
-        blueLowGoalCount = 7;
-        document.getElementById("bluePlusLowGoal").disabled = true;
-    }
-    document.getElementById("lowGoalBlueCount").innerHTML = blueLowGoalCount;
-    if (blueLowGoalCount > 0) {
-        blueLowGoalCount -= 1;
-        document.getElementById("bluePlusLowGoal").disabled = false;
-    }
-    if (blueLowGoalCount <= 0) {
-        blueLowGoalCount = 0;
-        document.getElementById("blueMinusLowGoal").disabled = true;
-    }
-    document.getElementById("lowGoalBlueCount").innerHTML = blueLowGoalCount;
-    let redParkCount = Number(document.getElementById("redParkCount").innerHTML);
-    if (redParkCount < 2) {
-        redParkCount += 1;
-        document.getElementById("redMinusPark").disabled = false;
-    }
-    if (redParkCount >= 2) {
-        redParkCount = 2;
-        document.getElementById("redPlusPark").disabled = true;
-    }
-    document.getElementById("redParkCount").innerHTML = redParkCount;
-    if (redParkCount > 0) {
-        redParkCount -= 1;
-        document.getElementById("redPlusPark").disabled = false;
-    }
-    if (redParkCount <= 0) {
-        redParkCount = 0;
-        document.getElementById("redMinusPark").disabled = true;
-    }
-    document.getElementById("redParkCount").innerHTML = redParkCount;
 
-    let blueParkCount = Number(document.getElementById("blueParkCount").innerHTML);
-    if (blueParkCount < 2) {
-        blueParkCount += 1;
-        document.getElementById("blueMinusPark").disabled = false;
-    }
-    if (blueParkCount >= 2) {
-        blueParkCount = 2;
-        document.getElementById("bluePlusPark").disabled = true;
-    }
-    document.getElementById("blueParkCount").innerHTML = blueParkCount;
-    if (blueParkCount > 0) {
-        blueParkCount -= 1;
-        document.getElementById("bluePlusPark").disabled = false;
-    }
-    if (blueParkCount <= 0) {
-        blueParkCount = 0;
-        document.getElementById("blueMinusPark").disabled = true;
-    }
-    document.getElementById("blueParkCount").innerHTML = blueParkCount;
-}
 
 function redPlusParkClick() {
     let redParkCount = Number(document.getElementById("redParkCount").innerHTML);
@@ -872,6 +814,7 @@ function redPlusParkClick() {
     document.getElementById("redParkCount").innerHTML = redParkCount;
     calculateScore();
 }
+
 function redMinusParkClick() {
     let redParkCount = Number(document.getElementById("redParkCount").innerHTML);
     if (redParkCount > 0) {
@@ -885,6 +828,7 @@ function redMinusParkClick() {
     document.getElementById("redParkCount").innerHTML = redParkCount;
     calculateScore();
 }
+
 function bluePlusParkClick() {
     let blueParkCount = Number(document.getElementById("blueParkCount").innerHTML);
     if (blueParkCount < 2) {
@@ -898,6 +842,7 @@ function bluePlusParkClick() {
     document.getElementById("blueParkCount").innerHTML = blueParkCount;
     calculateScore();
 }
+
 function blueMinusParkClick() {
     let blueParkCount = Number(document.getElementById("blueParkCount").innerHTML);
     if (blueParkCount > 0) {
@@ -911,12 +856,6 @@ function blueMinusParkClick() {
     document.getElementById("blueParkCount").innerHTML = blueParkCount;
     calculateScore();
 }
-
-
-
-
-
-
 
 function scaleLongGoals() {
     const wrappers = document.querySelectorAll(".longGoalContainer");
@@ -1010,5 +949,6 @@ function calculateSkillsScore() {
     } else {
         skillsLongGoalBImage.src = "images/long_goal_empty.png";
     }
+    
     document.getElementById("skillsScore").innerHTML = skillsScore;
 }
