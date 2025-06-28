@@ -402,25 +402,31 @@ function calculateScore() {
         redScore += 8;
         document.getElementById("redPlusPark").disabled = false;
         document.getElementById("redMinusPark").disabled = false;
+        document.getElementById("parkIconRed").src = "images/park_red_parked.png";
     } else if (redParkCount == 2) {
         redScore += 30;
         document.getElementById("redPlusPark").disabled = true;
         document.getElementById("redMinusPark").disabled = false;
+        document.getElementById("parkIconRed").src = "images/park_red_doubleparked.png";
     } else {
         document.getElementById("redPlusPark").disabled = false;
         document.getElementById("redMinusPark").disabled = true;
+        document.getElementById("parkIconRed").src = "images/park_red_unparked.png";
     }
     if (blueParkCount == 1) {
         blueScore += 8;
         document.getElementById("bluePlusPark").disabled = false;
         document.getElementById("blueMinusPark").disabled = false;
+        document.getElementById("parkIconBlue").src = "images/park_blue_parked.png";
     } else if (blueParkCount == 2) {
         blueScore += 30;
         document.getElementById("bluePlusPark").disabled = true;
         document.getElementById("blueMinusPark").disabled = false;
+        document.getElementById("parkIconBlue").src = "images/park_blue_doubleparked.png";
     } else {
         document.getElementById("bluePlusPark").disabled = false;
         document.getElementById("blueMinusPark").disabled = true;
+        document.getElementById("parkIconBlue").src = "images/park_blue_unparked.png";
     }
     
     redScore += (redCountHigh + redCountLow + redCountA + redCountB) * 3;
@@ -887,7 +893,6 @@ function scaleShortGoals() {
 
 window.addEventListener("resize", scaleLongGoals);
 window.addEventListener("load", scaleLongGoals);
-
 window.addEventListener("resize", scaleShortGoals);
 window.addEventListener("load", scaleShortGoals);
 
@@ -900,6 +905,8 @@ function switchMode() {
         document.querySelector(".skills_content").style = "display: none";
         document.querySelector(".scores").style = "display: flex";
         document.querySelector(".skills_scores").style = "display: none";
+        scaleLongGoals();
+        scaleShortGoals();
     } else if (scoringMode.value == "v5skills") {
         console.log("skills");
         document.querySelector(".content").style = "display: none";
