@@ -127,6 +127,7 @@ body {
     top: 175px;
     width: 100vw;
     display: none;
+    flex-wrap: wrap;
     flex-direction: column;
     color: white;
     justify-content: center;
@@ -489,8 +490,9 @@ input[id="blueArrowBButton"]:checked + label {
 
 .parkIcon {
     /*display: none;*/
+    aspect-ratio: 448/287;
     height: 120px;
-    width: 110px;
+    width: auto;
     margin: 0px 20px;
 }
 
@@ -573,7 +575,6 @@ input[id="blueArrowBButton"]:checked + label {
     height: 160px;
     overflow: hidden;
 }
-
 .skillsShortGoalSpacer {
     display: flex;
     height: 40px;
@@ -599,15 +600,12 @@ input[id="blueArrowBButton"]:checked + label {
     cursor: pointer;
     z-index: 10;
 }
-
-
 .longGoalImageSkills {
     display: flex;
     gap: 15px;
-    width: 400px;
+    width: 350px;
     height: auto;
 }
-
 .longGoalImageSkills img {
     display: flex;
     text-align: center;
@@ -615,15 +613,13 @@ input[id="blueArrowBButton"]:checked + label {
     align-items: center;
     aspect-ratio: 300/131.5;
     height: auto;
-    width: 400px;
+    width: 350px;
 }
-
 .shortGoalImageSkills {
     display: flex;
     width: 250px;
     height: auto;
 }
-
 .shortGoalImageSkills img {
     display: flex;
     text-align: center;
@@ -631,8 +627,107 @@ input[id="blueArrowBButton"]:checked + label {
     align-items: center;
     aspect-ratio: 250/202.613;
     width: 250px;
-
 }
+.skillsScoredContainer {
+    padding: 0px 0px;
+    margin: 0px;
+    width: 50vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    overflow: hidden;
+}
+.skillsScoredBlocks {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.skillsBlock {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1/1;
+    width: 60px;
+    height: 60px;
+}
+#skillsBlockCount {
+    font-weight: bold;
+    min-width: 45px;
+    font-size: 30px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.skillsClearedLoaders {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.skillsLoader {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1/3;
+    width: 50px;
+}
+#skillsLoaderCount {
+    font-weight: bold;
+    min-width: 45px;
+    font-size: 30px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.skillsParkContainer {
+    padding: 0px 0px;
+    margin: 0px;
+    width: 50vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    overflow: hidden;
+}
+.skillsParkContainer div {
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.skillsParkButton {
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    display: flex;
+    border: none;
+    background: none;
+    cursor: pointer;
+    height: 200px;
+    overflow: hidden;
+}
+.skillsClearedParkZone {
+    display: flex;
+    gap: 15px;
+    height: auto;
+    width: 200px;
+}
+.skillsClearedParkZone img {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 448/287;
+    height: auto;
+    width: 200px;
+}
+
 
 
 

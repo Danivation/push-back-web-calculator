@@ -176,6 +176,38 @@
                     </label>
                 </div>
             </div>
+            <div class="skillsScoredContainer">
+                <div class="skillsScoredBlocks">
+                    <div id="skillsBlockCount">0</div>
+                    <div class="buttonColumn">
+                        <button id="skillsPlusBlocks" class="redButton plusButton scoreButton" onclick="calculateSkillsScore(this)"></button>
+                        <button id="skillsMinusBlocks" class="redButton minusButton scoreButton" onclick="calculateSkillsScore(this)" disabled="true"></button>
+                    </div>
+                    <img class="skillsBlock" src="images/block.png">
+                </div>
+                <div class="skillsClearedLoaders">
+                    <div id="skillsLoaderCount">0</div>
+                    <div class="buttonColumn">
+                        <button id="skillsPlusLoaders" class="redButton plusButton scoreButton" onclick="calculateSkillsScore(this)"></button>
+                        <button id="skillsMinusLoaders" class="redButton minusButton scoreButton" onclick="calculateSkillsScore(this)" disabled="true"></button>
+                    </div>
+                    <img class="skillsLoader" src="images/loader.png">
+                </div>
+            </div>
+            <div class="skillsParkContainer">
+                <div class="skillsClearedParkZone">
+                    <label class="skillsParkButton">
+                        <input type="checkbox" id="skillsRedParkButton" style="display: none" onclick="calculateSkillsScore()">
+                        <img id="skillsRedPark" src="images/park_clear.png">
+                    </label>
+                </div>
+                <div class="skillsClearedParkZone">
+                    <label class="skillsParkButton">
+                        <input type="checkbox" id="skillsBlueParkButton" style="display: none" onclick="calculateSkillsScore()">
+                        <img id="skillsBluePark" src="images/park_clear.png">
+                    </label>
+                </div>
+            </div>
         </div>
         <script src="script.js"></script>
     </body>
