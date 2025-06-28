@@ -785,7 +785,6 @@ function bluePlusLowGoalClick() {
     document.getElementById("lowGoalBlueCount").innerHTML = blueCount;
     calculateScore();
 }
-
 function blueMinusLowGoalClick() {
     let blueCount = Number(document.getElementById("lowGoalBlueCount").innerHTML);
     if (blueCount > 0) {
@@ -799,7 +798,66 @@ function blueMinusLowGoalClick() {
     document.getElementById("lowGoalBlueCount").innerHTML = blueCount;
     calculateScore();
 }
+function calculate() {
+    let blueLowGoalCount = Number(document.getElementById("lowGoalBlueCount").innerHTML);
+    if (blueLowGoalCount < 7) {
+        blueLowGoalCount += 1;
+        document.getElementById("blueMinusLowGoal").disabled = false;
+    }
+    if (blueLowGoalCount >= 7) {
+        blueLowGoalCount = 7;
+        document.getElementById("bluePlusLowGoal").disabled = true;
+    }
+    document.getElementById("lowGoalBlueCount").innerHTML = blueLowGoalCount;
+    if (blueLowGoalCount > 0) {
+        blueLowGoalCount -= 1;
+        document.getElementById("bluePlusLowGoal").disabled = false;
+    }
+    if (blueLowGoalCount <= 0) {
+        blueLowGoalCount = 0;
+        document.getElementById("blueMinusLowGoal").disabled = true;
+    }
+    document.getElementById("lowGoalBlueCount").innerHTML = blueLowGoalCount;
+    let redParkCount = Number(document.getElementById("redParkCount").innerHTML);
+    if (redParkCount < 2) {
+        redParkCount += 1;
+        document.getElementById("redMinusPark").disabled = false;
+    }
+    if (redParkCount >= 2) {
+        redParkCount = 2;
+        document.getElementById("redPlusPark").disabled = true;
+    }
+    document.getElementById("redParkCount").innerHTML = redParkCount;
+    if (redParkCount > 0) {
+        redParkCount -= 1;
+        document.getElementById("redPlusPark").disabled = false;
+    }
+    if (redParkCount <= 0) {
+        redParkCount = 0;
+        document.getElementById("redMinusPark").disabled = true;
+    }
+    document.getElementById("redParkCount").innerHTML = redParkCount;
 
+    let blueParkCount = Number(document.getElementById("blueParkCount").innerHTML);
+    if (blueParkCount < 2) {
+        blueParkCount += 1;
+        document.getElementById("blueMinusPark").disabled = false;
+    }
+    if (blueParkCount >= 2) {
+        blueParkCount = 2;
+        document.getElementById("bluePlusPark").disabled = true;
+    }
+    document.getElementById("blueParkCount").innerHTML = blueParkCount;
+    if (blueParkCount > 0) {
+        blueParkCount -= 1;
+        document.getElementById("bluePlusPark").disabled = false;
+    }
+    if (blueParkCount <= 0) {
+        blueParkCount = 0;
+        document.getElementById("blueMinusPark").disabled = true;
+    }
+    document.getElementById("blueParkCount").innerHTML = blueParkCount;
+}
 
 function redPlusParkClick() {
     let redParkCount = Number(document.getElementById("redParkCount").innerHTML);
@@ -814,7 +872,6 @@ function redPlusParkClick() {
     document.getElementById("redParkCount").innerHTML = redParkCount;
     calculateScore();
 }
-
 function redMinusParkClick() {
     let redParkCount = Number(document.getElementById("redParkCount").innerHTML);
     if (redParkCount > 0) {
@@ -828,7 +885,6 @@ function redMinusParkClick() {
     document.getElementById("redParkCount").innerHTML = redParkCount;
     calculateScore();
 }
-
 function bluePlusParkClick() {
     let blueParkCount = Number(document.getElementById("blueParkCount").innerHTML);
     if (blueParkCount < 2) {
@@ -842,7 +898,6 @@ function bluePlusParkClick() {
     document.getElementById("blueParkCount").innerHTML = blueParkCount;
     calculateScore();
 }
-
 function blueMinusParkClick() {
     let blueParkCount = Number(document.getElementById("blueParkCount").innerHTML);
     if (blueParkCount > 0) {
@@ -856,6 +911,12 @@ function blueMinusParkClick() {
     document.getElementById("blueParkCount").innerHTML = blueParkCount;
     calculateScore();
 }
+
+
+
+
+
+
 
 function scaleLongGoals() {
     const wrappers = document.querySelectorAll(".longGoalContainer");
@@ -912,39 +973,42 @@ function switchMode() {
 
 
 
+const skillsLongGoalAButton = document.getElementById("skillsLongGoalAButton");
+const skillsLongGoalBButton = document.getElementById("skillsLongGoalBButton");
+const skillsHighGoalButton = document.getElementById("skillsHighGoalButton");
+const skillsLowGoalButton = document.getElementById("skillsLowGoalButton");
+
+const skillsLongGoalAImage = document.getElementById("longGoalSkillsA");
+const skillsLongGoalBImage = document.getElementById("longGoalSkillsB");
+const skillsShortGoalImage = document.getElementById("shortGoalSkills");
 function calculateSkillsScore() {
+    let skillsScore = 0;
 
-}
-
-const skillsHighGoal = document.getElementById("skillsHighGoalButton");
-const skillsLowGoal = document.getElementById("skillsLowGoalButton");
-function skillsShortGoalToggle() {
-    if (skillsHighGoal.checked && skillsLowGoal.checked) {
-        document.getElementById("shortGoalSkills").src = "images/short_goal_full_red.png";
-    } else if (skillsHighGoal.checked) {
-        document.getElementById("shortGoalSkills").src = "images/short_goal_top_red.png";
-    } else if (skillsLowGoal.checked) {
-        document.getElementById("shortGoalSkills").src = "images/short_goal_bottom_red.png";
+    if (skillsHighGoalButton.checked && skillsLowGoalButton.checked) {
+        skillsShortGoalImage.src = "images/short_goal_full_red.png";
+        skillsScore += 20;
+    } else if (skillsHighGoalButton.checked) {
+        skillsShortGoalImage.src = "images/short_goal_top_red.png";
+        skillsScore += 10;
+    } else if (skillsLowGoalButton.checked) {
+        skillsShortGoalImage.src = "images/short_goal_bottom_red.png";
+        skillsScore += 10;
     } else {
-        document.getElementById("shortGoalSkills").src = "images/short_goal_empty.png";
+        skillsShortGoalImage.src = "images/short_goal_empty.png";
     }
-}
 
-const skillsLongGoalA = document.getElementById("skillsLongGoalAButton");
-function skillsLongGoalAToggle() {
-    if (skillsLongGoalA.checked) {
-        document.getElementById("longGoalSkillsA").src = "images/long_goal_red.png";
+    if (skillsLongGoalAButton.checked) {
+        skillsLongGoalAImage.src = "images/long_goal_red.png";
+        skillsScore += 5;
     } else {
-        document.getElementById("longGoalSkillsA").src = "images/long_goal_empty.png";
+        skillsLongGoalAImage.src = "images/long_goal_empty.png";
     }
-    calculateSkillsScore();
-}
-
-const skillsLongGoalB = document.getElementById("skillsLongGoalBButton");
-function skillsLongGoalBToggle() {
-    if (skillsLongGoalB.checked) {
-        document.getElementById("longGoalSkillsB").src = "images/long_goal_red.png";
+    
+    if (skillsLongGoalBButton.checked) {
+        skillsLongGoalBImage.src = "images/long_goal_red.png";
+        skillsScore += 5;
     } else {
-        document.getElementById("longGoalSkillsB").src = "images/long_goal_empty.png";
+        skillsLongGoalBImage.src = "images/long_goal_empty.png";
     }
+    document.getElementById("skillsScore").innerHTML = skillsScore;
 }
