@@ -9,6 +9,7 @@ body {
     margin: 0px;
     padding-top: 75px;
     width: 100vw;
+    height: 100vh;
     background-color: #202020;
     justify-content: center;
 }
@@ -38,7 +39,6 @@ body {
 }
 
 .titleButtons {
-    display: static;
     align-items: center;
     align-self: center;
     height: 100%;
@@ -818,8 +818,6 @@ input[id="blueArrowBButton"]:checked + label {
     .titleBar>div.titleButtons {
         display: flex;
         justify-content: space-around;
-        
-        display: static;
         align-items: inherit;
         align-self: inherit;
         padding: 0;
@@ -845,6 +843,46 @@ input[id="blueArrowBButton"]:checked + label {
     #clearScore {
         display: flex;
         position: static;
+    }
+    #longGoalSkillsContainerA {
+        order: 1;
+    }
+    #longGoalSkillsContainerB {
+        order: 2;
+    }
+    #shortGoalSkillsContainer {
+        order: 3;
+    }
+    .longGoalImageSkills {
+        width: 300px;
+    }
+    .longGoalImageSkills img {
+        width: 300px;
+    }
+    .skillsScoredContainer {
+        order: 1;
+    }
+    .skillsParkContainer {
+        order: 2;
+    }
+    .skillsParkedZone {
+        order: 3;
+    }
+}
+
+@media (max-width: 650px) {
+    #shortGoalSkills {
+        width: 200px;
+    }
+    #longGoalSkillsA {
+        width: 250px;
+    }
+    #longGoalSkillsB {
+        width: 250px;
+    }
+    .skills_scale {
+        transform-origin: top center;
+        transform: scale(var(--scale));
     }
 }
 

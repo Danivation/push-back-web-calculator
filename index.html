@@ -151,68 +151,70 @@
             </div>
         </div>
         <div class="skills_content" id="skills_content">
-            <div class="skillsGoalsContainer">
-                <div class="longGoalImageSkills">
-                    <label class="skillsLongGoalButton">
-                        <input type="checkbox" id="skillsLongGoalAButton" style="display: none" onclick="calculateSkillsScore()">
-                        <img id="longGoalSkillsA" src="images/long_goal_empty.png">
-                    </label>
-                </div>
-                <div class="shortGoalImageSkills">
-                    <label class="skillsShortGoalButton" id="skillsHighGoal">
-                        <input type="checkbox" id="skillsHighGoalButton" style="display: none" onclick="calculateSkillsScore()">
-                    </label>
-                    <div class="skillsShortGoalSpacer">
-                        <img id="shortGoalSkills" src="images/short_goal_empty.png">
-                    </div>
-                    <label class="skillsShortGoalButton" id="skillsLowGoal">
-                        <input type="checkbox" id="skillsLowGoalButton" style="display: none" onclick="calculateSkillsScore()">
-                    </label>
-                </div>
-                <div class="longGoalImageSkills">
-                    <label class="skillsLongGoalButton">
-                        <input type="checkbox" id="skillsLongGoalBButton" style="display: none" onclick="calculateSkillsScore()">
-                        <img id="longGoalSkillsB" src="images/long_goal_empty.png">
-                    </label>
-                </div>
-            </div>
-            <div class="skillsBottomRow">
-                <div class="skillsScoredContainer">
-                    <div class="skillsScoredBlocks">
-                        <div id="skillsBlockCount">0</div>
-                        <div class="buttonColumn">
-                            <button id="skillsPlusBlocks" class="redButton plusButton scoreButton" onclick="calculateSkillsScore(this)"></button>
-                            <button id="skillsMinusBlocks" class="redButton minusButton scoreButton" onclick="calculateSkillsScore(this)" disabled="true"></button>
-                        </div>
-                        <img class="skillsBlock" src="images/block.png">
-                    </div>
-                    <div class="skillsClearedLoaders">
-                        <div id="skillsLoaderCount">0</div>
-                        <div class="buttonColumn">
-                            <button id="skillsPlusLoaders" class="redButton plusButton scoreButton" onclick="calculateSkillsScore(this)"></button>
-                            <button id="skillsMinusLoaders" class="redButton minusButton scoreButton" onclick="calculateSkillsScore(this)" disabled="true"></button>
-                        </div>
-                        <img class="skillsLoader" src="images/loader.png">
-                    </div>
-                </div>
-                <div class="skillsParkedZone">
-                    <label class="skillsParkButton">
-                        <input type="checkbox" id="skillsParkedButton" style="display: none" onclick="calculateSkillsScore()">
-                        <img id="skillsParked" src="images/park_red_unparked.png">
-                    </label>
-                </div>
-                <div class="skillsParkContainer">
-                    <div class="skillsClearedParkZone">
-                        <label class="skillsParkButton">
-                            <input type="checkbox" id="skillsRedParkButton" style="display: none" onclick="calculateSkillsScore()">
-                            <img id="skillsRedPark" src="images/park_clear.png">
+            <div class="skills_scale">
+                <div class="skillsGoalsContainer">
+                    <div class="longGoalImageSkills" id="longGoalSkillsContainerA">
+                        <label class="skillsLongGoalButton">
+                            <input type="checkbox" id="skillsLongGoalAButton" style="display: none" onclick="calculateSkillsScore()">
+                            <img id="longGoalSkillsA" src="images/long_goal_empty.png">
                         </label>
                     </div>
-                    <div class="skillsClearedParkZone">
-                        <label class="skillsParkButton">
-                            <input type="checkbox" id="skillsBlueParkButton" style="display: none" onclick="calculateSkillsScore()">
-                            <img id="skillsBluePark" src="images/park_clear.png">
+                    <div class="shortGoalImageSkills" id="shortGoalSkillsContainer">
+                        <label class="skillsShortGoalButton" id="skillsHighGoal">
+                            <input type="checkbox" id="skillsHighGoalButton" style="display: none" onclick="calculateSkillsScore()">
                         </label>
+                        <div class="skillsShortGoalSpacer">
+                            <img id="shortGoalSkills" src="images/short_goal_empty.png">
+                        </div>
+                        <label class="skillsShortGoalButton" id="skillsLowGoal">
+                            <input type="checkbox" id="skillsLowGoalButton" style="display: none" onclick="calculateSkillsScore()">
+                        </label>
+                    </div>
+                    <div class="longGoalImageSkills" id="longGoalSkillsContainerB">
+                        <label class="skillsLongGoalButton">
+                            <input type="checkbox" id="skillsLongGoalBButton" style="display: none" onclick="calculateSkillsScore()">
+                            <img id="longGoalSkillsB" src="images/long_goal_empty.png">
+                        </label>
+                    </div>
+                </div>
+                <div class="skillsBottomRow">
+                    <div class="skillsScoredContainer">
+                        <div class="skillsScoredBlocks">
+                            <div id="skillsBlockCount">0</div>
+                            <div class="buttonColumn">
+                                <button id="skillsPlusBlocks" class="redButton plusButton scoreButton" onclick="calculateSkillsScore(this)"></button>
+                                <button id="skillsMinusBlocks" class="redButton minusButton scoreButton" onclick="calculateSkillsScore(this)" disabled="true"></button>
+                            </div>
+                            <img class="skillsBlock" src="images/block.png">
+                        </div>
+                        <div class="skillsClearedLoaders">
+                            <div id="skillsLoaderCount">0</div>
+                            <div class="buttonColumn">
+                                <button id="skillsPlusLoaders" class="redButton plusButton scoreButton" onclick="calculateSkillsScore(this)"></button>
+                                <button id="skillsMinusLoaders" class="redButton minusButton scoreButton" onclick="calculateSkillsScore(this)" disabled="true"></button>
+                            </div>
+                            <img class="skillsLoader" src="images/loader.png">
+                        </div>
+                    </div>
+                    <div class="skillsParkedZone">
+                        <label class="skillsParkButton">
+                            <input type="checkbox" id="skillsParkedButton" style="display: none" onclick="calculateSkillsScore()">
+                            <img id="skillsParked" src="images/park_red_unparked.png">
+                        </label>
+                    </div>
+                    <div class="skillsParkContainer">
+                        <div class="skillsClearedParkZone">
+                            <label class="skillsParkButton">
+                                <input type="checkbox" id="skillsRedParkButton" style="display: none" onclick="calculateSkillsScore()">
+                                <img id="skillsRedPark" src="images/park_clear.png">
+                            </label>
+                        </div>
+                        <div class="skillsClearedParkZone">
+                            <label class="skillsParkButton">
+                                <input type="checkbox" id="skillsBlueParkButton" style="display: none" onclick="calculateSkillsScore()">
+                                <img id="skillsBluePark" src="images/park_clear.png">
+                            </label>
+                        </div>
                     </div>
                 </div>
             </div>

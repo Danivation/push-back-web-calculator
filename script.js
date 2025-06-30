@@ -891,10 +891,27 @@ function scaleShortGoals() {
     });
 }
 
+function scaleSkills() {
+    const wrappers = document.querySelectorAll(".skills_scale");
+
+    wrappers.forEach(wrapper => {
+        const parent = wrapper.parentElement;
+
+        const scaleX = parent.clientWidth / 650;   // base width
+        const scaleY = parent.clientHeight / 650;  // base height
+        const scale = Math.min(scaleX, scaleY);
+
+        wrapper.style.setProperty("--scale", scale);
+    });
+
+}
+
 window.addEventListener("resize", scaleLongGoals);
 window.addEventListener("load", scaleLongGoals);
 window.addEventListener("resize", scaleShortGoals);
 window.addEventListener("load", scaleShortGoals);
+window.addEventListener("resize", scaleSkills);
+window.addEventListener("load", scaleSkills);
 
 const scoringMode = document.getElementById("scoringModeSelector");
 scoringMode.addEventListener("change", switchMode);
