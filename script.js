@@ -29,9 +29,12 @@ function handleFiles() {
     reader.onload = () => {
         const jsonResult = JSON.parse(reader.result);
         console.log(jsonResult);
-        if (jsonResult.GAME_FORMAT.startsWith("25_26_PUSH_BACK")) {
+        if (jsonResult.GAME_FORMAT.startsWith("25_26_PUSH_BACK_MATCH")) {
             messageBox.innerHTML = "File loaded";
             fillScores(jsonResult);
+        } else if (jsonResult.GAME_FORMAT.startsWith("25_26_PUSH_BACK_SKILLS")) {
+            messageBox.innerHTML = "File loaded";
+            fillSkillsScores(jsonResult);
         } else {
             messageBox.innerHTML = "Wrong game format";
         }
@@ -109,7 +112,15 @@ async function saveFile(filename, content) {
 }
 
 function saveScores() {
-    let format = {"GAME_FORMAT": "25_26_PUSH_BACK_V1",
+    if (scoringMode.value == "v5match") {
+        saveMatchScores();
+    } else if (scoringMode.value == "v5skills") {
+        saveSkillsScores();
+    }
+}
+
+function saveMatchScores() {
+    let format = {"GAME_FORMAT": "25_26_PUSH_BACK_MATCH_V2",
         "DATA": {
             "RED_SCORE": 0,
             "BLUE_SCORE": 0,
@@ -468,6 +479,7 @@ function calculateScore() {
 }
 
 function clearScore() {
+    clearSkillsScore();
     document.getElementById("redAutoCheckbox").checked = false;
     document.getElementById("blueAutoCheckbox").checked = false;
     
@@ -958,6 +970,84 @@ const skillsLoaderNumber = document.getElementById("skillsLoaderCount");
 const skillsParkedImage = document.getElementById("skillsParked"); 
 const skillsRedParkImage = document.getElementById("skillsRedPark"); 
 const skillsBlueParkImage = document.getElementById("skillsBluePark"); 
+
+function clearSkillsScore() {
+    skillsLongGoalAButton.checked = false;
+    skillsLongGoalBButton.checked = false;
+    skillsHighGoalButton.checked = false;
+    skillsLowGoalButton.checked = false;
+    skillsParkedButton.checked = false;
+    skillsRedParkButton.checked = false;
+    skillsBlueParkButton.checked = false;
+    skillsBlockNumber.innerHTML = 0;
+    skillsLoaderNumber.innerHTML = 0;
+    calculateSkillsScore();
+}
+
+function saveSkillsScores() {
+    let format = {"GAME_FORMAT": "25_26_PUSH_BACK_SKILLS_V2",
+        "DATA": {
+            "SKILLS_SCORE": 0,
+            "LONG_GOAL_1_CHECKED": false,
+            "LONG_GOAL_2_CHECKED": false,
+            "HIGH_GOAL_CHECKED": false,
+            "LOW_GOAL_CHECKED": false,
+            "BLOCKS_COUNT": 0,
+            "LOADERS_COUNT": 0,
+            "PARKED_CHECKED": false,
+            "PARK_RED_CLEARED": false,
+            "PARK_BLUE_CLEARED": false
+        }
+    }
+    let data = format.DATA;
+
+    calculateSkillsScore();
+    data.SKILLS_SCORE = Number(document.getElementById("skillsScore").innerHTML);
+    data.LONG_GOAL_1_CHECKED = skillsLongGoalAButton.checked;
+    data.LONG_GOAL_2_CHECKED = skillsLongGoalBButton.checked;
+    data.HIGH_GOAL_CHECKED = skillsHighGoalButton.checked;
+    data.LOW_GOAL_CHECKED = skillsLowGoalButton.checked;
+    data.BLOCKS_COUNT = Number(skillsBlockNumber.innerHTML);
+    data.LOADERS_COUNT = Number(skillsLoaderNumber.innerHTML);
+    data.PARKED_CHECKED = skillsParkedButton.checked;
+    data.PARK_RED_CLEARED = skillsRedParkButton.checked;
+    data.PARK_BLUE_CLEARED = skillsBlueParkButton.checked;
+    
+    saveFile("push-back-saved-score.txt", JSON.stringify(format, null, 2));
+}
+
+function fillSkillsScores(scores) {
+    const message = messageBox.innerHTML;
+    clearSkillsScore();
+    messageBox.innerHTML = message;
+    const data = scores.DATA;
+
+    if (
+        (data.BLOCKS_COUNT <= 44) && 
+        (data.LOADERS_COUNT <= 4)
+    ) {
+        skillsBlockNumber.innerHTML = data.BLOCKS_COUNT;
+        skillsLoaderNumber.innerHTML = data.LOADERS_COUNT;
+
+        skillsLongGoalAButton.checked = data.LONG_GOAL_1_CHECKED;
+        skillsLongGoalBButton.checked = data.LONG_GOAL_2_CHECKED;
+        skillsHighGoalButton.checked = data.HIGH_GOAL_CHECKED;
+        skillsLowGoalButton.checked = data.LOW_GOAL_CHECKED;
+
+        skillsParkedButton.checked = data.PARKED_CHECKED;
+        skillsRedParkButton.checked = data.PARK_RED_CLEARED;
+        skillsBlueParkButton.checked = data.PARK_BLUE_CLEARED;
+
+        const calculatedScore = calculateSkillsScore();
+        if (calculatedScore != data.SKILLS_SCORE) {
+            clearSkillsScore();
+            messageBox.innerHTML = "Invalid score data"
+        }
+    } else {
+        messageBox.innerHTML = "Invalid score data";
+    }
+}
+
 function calculateSkillsScore(el) {
     let skillsScore = 0;
     let skillsBlockCount = Number(skillsBlockNumber.innerHTML);
@@ -995,20 +1085,25 @@ function calculateSkillsScore(el) {
             skillsBlockCount += 1;
             skillsBlocksMinusButton.disabled = false;
         }
-        if (skillsBlockCount >= 44) {
-            skillsBlockCount = 44;
-            skillsBlocksPlusButton.disabled = true;
-        }
     }
+    if (skillsBlockCount >= 44) {
+        skillsBlockCount = 44;
+        skillsBlocksPlusButton.disabled = true;
+    } else {
+        skillsBlocksPlusButton.disabled = false;
+    }
+
     if (el == skillsBlocksMinusButton) {
         if (skillsBlockCount > 0) {
             skillsBlockCount -= 1;
             skillsBlocksPlusButton.disabled = false;
         }
-        if (skillsBlockCount <= 0) {
-            skillsBlockCount = 0;
-            skillsBlocksMinusButton.disabled = true;
-        }
+    }
+    if (skillsBlockCount <= 0) {
+        skillsBlockCount = 0;
+        skillsBlocksMinusButton.disabled = true;
+    } else {
+        skillsBlocksMinusButton.disabled = false;
     }
 
     if (el == skillsLoadersPlusButton) {
@@ -1016,21 +1111,27 @@ function calculateSkillsScore(el) {
             skillsLoaderCount += 1;
             skillsLoadersMinusButton.disabled = false;
         }
-        if (skillsLoaderCount >= 4) {
-            skillsLoaderCount = 4;
-            skillsLoadersPlusButton.disabled = true;
-        }
     }
+    if (skillsLoaderCount >= 4) {
+        skillsLoaderCount = 4;
+        skillsLoadersPlusButton.disabled = true;
+    } else {
+        skillsLoadersPlusButton.disabled = false;
+    }
+
     if (el == skillsLoadersMinusButton) {
         if (skillsLoaderCount > 0) {
             skillsLoaderCount -= 1;
             skillsLoadersPlusButton.disabled = false;
         }
-        if (skillsLoaderCount <= 0) {
-            skillsLoaderCount = 0;
-            skillsLoadersMinusButton.disabled = true;
-        }
     }
+    if (skillsLoaderCount <= 0) {
+        skillsLoaderCount = 0;
+        skillsLoadersMinusButton.disabled = true;
+    } else {
+        skillsLoadersMinusButton.disabled = false;
+    }
+
     skillsBlockNumber.innerHTML = skillsBlockCount;
     skillsLoaderNumber.innerHTML = skillsLoaderCount;
     
@@ -1055,4 +1156,5 @@ function calculateSkillsScore(el) {
 
     skillsScore += (skillsLoaderCount * 5) + (skillsBlockCount);
     document.getElementById("skillsScore").innerHTML = skillsScore;
+    return skillsScore;
 }
