@@ -934,6 +934,7 @@ function switchMode() {
         document.querySelector(".skills_content").style = "display: none";
         document.querySelector(".scores").style = "display: flex";
         document.querySelector(".skills_scores").style = "display: none";
+        document.querySelector("#alexdvd").style = "display: flex";
         scaleLongGoals();
         scaleShortGoals();
         clearScore();
@@ -943,7 +944,15 @@ function switchMode() {
         document.querySelector(".skills_content").style = "display: flex";
         document.querySelector(".scores").style = "display: none";
         document.querySelector(".skills_scores").style = "display: flex";
+        document.querySelector("#alexdvd").style = "display: flex";
         clearScore();
+    } else if (scoringMode.value = "alexdvd" {
+        console.log("alex dvd");
+        document.querySelector(".content").style = "display: none";
+        document.querySelector(".skills_content").style = "display: none";
+        document.querySelector(".scores").style = "display: none";
+        document.querySelector(".skills_scores").style = "display: none";
+        document.querySelector("#alexdvd").style = "display: flex";
     }
 }
 
