@@ -762,12 +762,22 @@ input[id="blueArrowBButton"]:checked + label {
     overflow: hidden;
 }
 
-.alexdvd {
+.AlexDVD {
+    display: none;
+    height: 88vh;
+    width: 100vw;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+#dvdframe {
     display: none;
     height: 100%;
     width: 100%;
     padding: 0;
     margin: 0;
+    border: none;
 }
 
 

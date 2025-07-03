@@ -930,6 +930,7 @@ scoringMode.addEventListener("change", switchMode);
 function switchMode() {
     if (scoringMode.value == "v5match") {
         console.log("match");
+        document.querySelector("#view").style = "background: #202020";
         document.querySelector(".content").style = "display: flex";
         document.querySelector(".skills_content").style = "display: none";
         document.querySelector(".scores").style = "display: flex";
@@ -940,19 +941,23 @@ function switchMode() {
         clearScore();
     } else if (scoringMode.value == "v5skills") {
         console.log("skills");
+        document.querySelector("#view").style = "background: #202020";
         document.querySelector(".content").style = "display: none";
         document.querySelector(".skills_content").style = "display: flex";
         document.querySelector(".scores").style = "display: none";
         document.querySelector(".skills_scores").style = "display: flex";
         document.querySelector("#alexdvd").style = "display: none";
+        scaleSkills();
         clearScore();
-    } else if (scoringMode.value = "alexdvd" {
+    } else if (scoringMode.value = "alexdvd") {
         console.log("alex dvd");
+        document.querySelector("#view").style = "background: black";
         document.querySelector(".content").style = "display: none";
         document.querySelector(".skills_content").style = "display: none";
         document.querySelector(".scores").style = "display: none";
         document.querySelector(".skills_scores").style = "display: none";
         document.querySelector("#alexdvd").style = "display: flex";
+        document.querySelector("#dvdframe").style = "display: flex";
     }
 }
 
