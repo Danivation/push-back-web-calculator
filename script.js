@@ -958,6 +958,7 @@ function switchMode() {
         document.querySelector(".skills_scores").style = "display: none";
         document.querySelector("#alexdvd").style = "display: flex";
         document.querySelector("#dvdframe").style = "display: flex";
+        document.getElementById("dvdframe").contentWindow.document.getElementById("dvdLogo").click();
     }
 }
 
