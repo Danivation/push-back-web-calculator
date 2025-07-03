@@ -762,6 +762,13 @@ input[id="blueArrowBButton"]:checked + label {
     overflow: hidden;
 }
 
+.alexdvd {
+    display: none;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
 
 
 /* flip around park buttons and move them in */
